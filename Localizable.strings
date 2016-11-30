@@ -447,6 +447,13 @@
 "RECORD_MEDIA_ADD_TAG_CANCEL_EN"            = "Cancel";
 "RECORD_MEDIA_ADD_TAG_CANCEL_AR"            = "إلغاء الامر";
 
+// pick location
+"PICK_LOCATION_TAGS_TITLE_AR"               = "قم باضافة وسوم";
+"PICK_LOCATION_TAGS_TITLE_EN"               = "Add tags";
+"PICK_LOCATION_WEEZ_LOCATIONS_TITLE_EN"     = "Active locations";
+"PICK_LOCATION_WEEZ_LOCATIONS_TITLE_AR"     = "مواقع نشطة";
+"PICK_LOCATION_OTHER_LOCATIONS_TITLE_EN"     = "Other locations";
+"PICK_LOCATION_OTHER_LOCATIONS_TITLE_AR"     = "مواقع اخرى";
 
 // Group Chat
 "GROUP_DETAILS_TITLE_AR"                    = "معلومات المجموعة";

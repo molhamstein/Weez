@@ -521,9 +521,14 @@ typedef enum{
         LocationListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1 forIndexPath:indexPath];
         Location *locationObj = [listOfPlaces objectAtIndex:indexPath.row];
         [cell populateCellWithContent:locationObj withSelected:[_selectedLocation.objectId isEqual:locationObj.objectId]];
-        //cell.backgroundColor = [UIColor greenColor];
         return  cell;
     }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(nonnull UIView *)view forSection:(NSInteger)section{
+    [UIView performWithoutAnimation:^{
+        [view layoutIfNeeded];
+    }];
 }
 
 // Select item

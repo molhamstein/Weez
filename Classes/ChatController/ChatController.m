@@ -999,15 +999,15 @@
                 if(msg.isTimelineMsg){
                     thumbUrl = msg.thumb;
                     previewText = @"Timeline";
-                }else if(msg.media.mediaType == kMediaTypeVideo){
-                    thumbUrl = msg.media.thumbLink;
-                    previewText = @"Video";
+                }else if(msg.location){
+                    thumbUrl = [[AppManager sharedManager] getGoogleStaticMaplinkForLat:msg.location.latitude lng:msg.location.longitude width:100 height:100];
+                    previewText = @"Map Location";
                 }else if(msg.media.mediaType == kMediaTypeImage){
                     thumbUrl = msg.media.thumbLink;
                     previewText = @"Photo";
-                }else if(msg.media.mediaType == kMediaTypeLocation){
-                    thumbUrl = [[AppManager sharedManager] getGoogleStaticMaplinkForLat:msg.location.latitude lng:msg.location.longitude width:100 height:100];
-                    previewText = @"Map Location";
+                }else if(msg.media.mediaType == kMediaTypeVideo){
+                    thumbUrl = msg.media.thumbLink;
+                    previewText = @"Video";
                 }
                 imgOriginalMsgPreviewImg.contentMode = UIViewContentModeScaleAspectFill;
                 [imgOriginalMsgPreviewImg sd_setImageWithURL:[NSURL URLWithString:thumbUrl] placeholderImage:nil
@@ -1244,7 +1244,7 @@
         JSQMessage *message = [self getMessageItemAtIndexPath:indexPath];
         ChatMessage *chatMsg = [self getChatMessageAtCollectionViewIndexPath:indexPath];
         @try{
-            if(!chatMsg.date || !message.date){
+            if(!message.date){
                 [[ConnectionManager sharedManager] submitLog:[NSString stringWithFormat:@"Chat message top label nil date:%@ originalDate:%@ msgId:%@ inGroup:%@", message.date, chatMsg.date, chatMsg.objectId, group.objectId] success:^{}];
                 [[ConnectionManager sharedManager] submitLog:[NSString stringWithFormat:@"Chat message top locale settings:%@ originalDate:%@ msgId:%@ inGroup:%@", [[NSLocale preferredLanguages] objectAtIndex:0], chatMsg.date, chatMsg.objectId, group.objectId] success:^{}];
             }
@@ -1395,9 +1395,13 @@
 
 - (ChatMessage*) getChatMessageAtCollectionViewIndexPath:(NSIndexPath *)indexPath{
     if(group.isGroup){
-        return [group.messages objectAtIndex:indexPath.row-1];
+        if((indexPath.row-1) < [group.messages count])
+            return [group.messages objectAtIndex:indexPath.row-1];
+        return nil;
     }else{
-        return [group.messages objectAtIndex:indexPath.row];
+        if((indexPath.row) < [group.messages count])
+            return [group.messages objectAtIndex:indexPath.row];
+        return nil;
     }
 }
 

@@ -858,15 +858,15 @@ static AppManager *sharedManager = nil;
             if(msg.isTimelineMsg){
                 thumbUrl = msg.thumb;
                 description = @"Timeline";
-            }else if(msg.media.mediaType == kMediaTypeVideo){
-                thumbUrl = msg.media.thumbLink;
-                description = @"Video";
+            }else if(msg.media.location){
+                thumbUrl = [self getGoogleStaticMaplinkForLat:msg.location.latitude lng:msg.location.longitude width:100 height:100];
+                description = @"Map Location";
             }else if(msg.media.mediaType == kMediaTypeImage){
                 thumbUrl = msg.media.thumbLink;
                 description = @"Photo";
-            }else if(msg.media.mediaType == kMediaTypeLocation){
-                thumbUrl = [self getGoogleStaticMaplinkForLat:msg.location.latitude lng:msg.location.longitude width:100 height:100];
-                description = @"Map Location";
+            }else if(msg.media.mediaType == kMediaTypeVideo){
+                thumbUrl = msg.media.thumbLink;
+                description = @"Video";
             }
             lblOriginalMsgDescription.text = description;
             
@@ -1092,7 +1092,7 @@ static AppManager *sharedManager = nil;
         if([[UIScreen mainScreen] scale] == 2.0){
             extraSize = CGSizeMake(25, 28);
         }else if([[UIScreen mainScreen] scale] >= 2.0){
-            extraSize = CGSizeMake(43, 43);
+            extraSize = CGSizeMake(80, 80);
         }
     }
     return extraSize;
