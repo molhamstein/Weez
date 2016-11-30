@@ -132,17 +132,7 @@
      {
          weakSelf.profileImageView.image = [[AppManager sharedManager] convertImageToCircle:weakSelf.profileImageView.image clipToCircle:YES withDiamter:100 borderColor:[UIColor clearColor] borderWidth:0 shadowOffSet:CGSizeMake(0, 0)];
      }];
-    // follow/unfollow this user
-    [followButton setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateNormal];
-    [followButton setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateDisabled];
-    [followButton setTitle:@"" forState:UIControlStateNormal];
-    // following this friend
-    if ([activeTimeline isFollowing])
-    {
-        [followButton setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateNormal];
-        [followButton setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateDisabled];
-        [followButton setTitle:@"" forState:UIControlStateNormal];
-    }
+    [self updateFollowBtn];
     // this is my profile
     [followButton setHidden:NO];
     [boostsCountLabel setHidden:YES];
@@ -262,17 +252,7 @@
      {
          weakSelf.profileImageView.image = [[AppManager sharedManager] convertImageToCircle:weakSelf.profileImageView.image clipToCircle:YES withDiamter:100 borderColor:[UIColor clearColor] borderWidth:0 shadowOffSet:CGSizeMake(0, 0)];
      }];
-    // follow/unfollow this user
-    [followButton setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateNormal];
-    [followButton setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateDisabled];
-    [followButton setTitle:@"" forState:UIControlStateNormal];
-    // following this friend
-    if ([activeTimeline isFollowing])
-    {
-        [followButton setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateNormal];
-        [followButton setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateDisabled];
-        [followButton setTitle:@"" forState:UIControlStateNormal];
-    }
+    [self updateFollowBtn];
     // this is my profile
     [followButton setHidden:NO];
     if ([activeTimeline.userId isEqualToString:[[ConnectionManager sharedManager] userObject].objectId])
@@ -332,6 +312,30 @@
         [privateContainer setHidden:YES];
     }
 }
+
+-(void) updateFollowBtn
+{
+    FOLLOWING_STATE state = [activeTimeline getFollowingState];
+    NSString *icon = @"friendFollowIcon";
+    switch (state) {
+        case REQUESTED:
+            icon = @"friendFollowIconPending";
+            break;
+        case FOLLOWING:
+            icon = @"friendFollowIconActive";
+            break;
+        case NOT_FOLLOWING:
+            icon = @"friendFollowIcon";
+            break;
+            
+        default:
+            break;
+    }
+    [followButton setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
+    [followButton setImage:[UIImage imageNamed:icon] forState:UIControlStateDisabled];
+    [followButton setTitle:@"" forState:UIControlStateNormal];
+}
+
 -(void) refreshLocationInfoViewsWithMedia:(Media*)media{
     TimelineController __weak *weakSelf = self;
     // set location if exist
@@ -689,11 +693,12 @@
     
 }
 
+
 // Follow action
 - (IBAction)followAction:(id)sender
 {
     [followButton setEnabled:NO];
-    [[ConnectionManager sharedManager].userObject followFriend:activeTimeline.userId];
+    [[ConnectionManager sharedManager].userObject followFriend:activeTimeline.userId withPrivateProfile:activeTimeline.isPrivate];
     // animate the pressed voted image
     followButton.alpha = 1.0;
     [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^
@@ -703,14 +708,7 @@
      }
                      completion:^(BOOL finished)
      {
-         // follow/unfollow this user
-         [followButton setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateNormal];
-         [followButton setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateDisabled];
-         if ([activeTimeline isFollowing])
-         {
-             [followButton setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateNormal];
-             [followButton setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateDisabled];
-         }
+         [self updateFollowBtn];
          [UIView animateWithDuration:0.1 delay:0.0 options: UIViewAnimationOptionTransitionCrossDissolve animations:^
           {
               followButton.alpha = 1.0;

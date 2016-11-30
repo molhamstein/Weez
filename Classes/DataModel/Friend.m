@@ -19,6 +19,7 @@
 @synthesize profilePic;
 @synthesize phoneNumber;
 @synthesize followersCount;
+@synthesize isPrivate;
 @synthesize grantType;
 
 #pragma mark -
@@ -41,6 +42,7 @@
     profilePic = [decoder decodeObjectForKey:@"profilePic"];
     phoneNumber = [decoder decodeObjectForKey:@"phoneNumber"];
     followersCount = [decoder decodeIntForKey:@"followersCount"];
+    isPrivate = [decoder decodeBoolForKey:@"isPrivate"];
     grantType = [decoder decodeIntForKey:@"grantType"];
     return self;
 }
@@ -57,6 +59,7 @@
     [encoder encodeObject:displayName forKey:@"displayName"];
     [encoder encodeObject:profilePic forKey:@"profilePic"];
     [encoder encodeInt:followersCount forKey:@"followersCount"];
+    [encoder encodeBool:isPrivate forKey:@"isPrivate"];
     [encoder encodeInt:grantType forKey:@"grantType"];
 }
 
@@ -83,7 +86,7 @@
     }else{
         followersCount = 0;
     }
-    
+    isPrivate = [[jsonObject objectForKey:@"private"] boolValue];
     // set grant type
     grantType = kUserGrantTypePassword;
     if ([facebookId length] > 1 && [facebookId intValue] > 0)
@@ -108,11 +111,12 @@
     }
 }
 
-// Friend is following me
-- (BOOL)isFollowing
+
+
+- (BOOL)amAskingForFollow
 {
     // this friend exists in user following list
-    if ([[[ConnectionManager sharedManager] userObject].followingsList containsObject:objectId])
+    if ([[[ConnectionManager sharedManager] userObject].sentFollowingRequestsList containsObject:objectId])
         return YES;
     return NO;
 }
@@ -124,6 +128,41 @@
     if ([[[ConnectionManager sharedManager] userObject].followersList containsObject:objectId])
         return YES;
     return NO;
+}
+
+- (BOOL)isAskingForFollow
+{
+    // this friend exists in user following list
+    if ([[[ConnectionManager sharedManager] userObject].recievedFollowingRequestsList containsObject:objectId])
+        return YES;
+    return NO;
+}
+
+// Friend is following me
+- (BOOL)isFollowing
+{
+    // this friend exists in user following list
+    if ([[[ConnectionManager sharedManager] userObject].followingsList containsObject:objectId])
+        return YES;
+    return NO;
+}
+
+- (FOLLOWING_STATE) getFollowingState
+{
+    if([self amAskingForFollow])
+        return REQUESTED;
+    if ([self isFollowing])
+        return FOLLOWING;
+    return NOT_FOLLOWING;
+}
+
+- (FOLLOWER_STATE) getFollowerState
+{
+    if([self isFollower])
+        return FOLLOWER;
+    if([self isAskingForFollow])
+        return PENDING;
+    return NOT_FOLLOWER;
 }
 
 @end

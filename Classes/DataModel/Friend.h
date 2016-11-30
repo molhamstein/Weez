@@ -19,6 +19,7 @@
     NSString *profilePic;
     NSString *phoneNumber;
     int followersCount;
+    BOOL isPrivate;
     UserGrantType grantType;
 }
 
@@ -30,11 +31,14 @@
 @property (nonatomic,retain) NSString *profilePic;
 @property (nonatomic,retain) NSString *phoneNumber;
 @property (nonatomic) int followersCount;
+@property (nonatomic) BOOL isPrivate;
 @property (nonatomic) UserGrantType grantType;
 
 - (void)fillWithJSON:(NSDictionary*)jsonObject;
 - (NSString*)getProfilePicLink;
 - (BOOL)isFollowing;
 - (BOOL)isFollower;
+- (FOLLOWING_STATE) getFollowingState;
+- (FOLLOWER_STATE) getFollowerState;
 
 @end

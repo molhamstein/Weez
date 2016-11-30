@@ -63,6 +63,7 @@
 - (void)fillWithJSON:(NSDictionary*)jsonObject;
 - (NSString*)getUpdatedDateString:(BOOL)isShort;
 - (BOOL)isFollowing;
+- (BOOL)amAskingForFollow;
 - (BOOL)isFollower;
 - (FOLLOWING_STATE) getFollowingState;
 - (FOLLOWER_STATE) getFollowerState;

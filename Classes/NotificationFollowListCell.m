@@ -67,21 +67,28 @@
     descLabel.attributedText = coloredTxt;
     
     
-    // follow/unfollow this user
-    [followButton setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateNormal];
-    [followButton setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateDisabled];
-    [followButton setTitle:@"" forState:UIControlStateNormal];
     // following this friend
-    
     Friend *friendObject = [[Friend alloc] init];
     friendObject.objectId = object.actor.objectId;
-    //if I follow the actore
-    if ([friendObject isFollowing])
-    {
-        [followButton setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateNormal];
-        [followButton setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateDisabled];
-        [followButton setTitle:@"" forState:UIControlStateNormal];
+    FOLLOWING_STATE state = [friendObject getFollowingState];
+    NSString *icon = @"friendFollowIcon";
+    switch (state) {
+        case REQUESTED:
+            icon = @"friendFollowIconPending";
+            break;
+        case FOLLOWING:
+            icon = @"friendFollowIconActive";
+            break;
+        case NOT_FOLLOWING:
+            icon = @"friendFollowIcon";
+            break;
+            
+        default:
+            break;
     }
+    [followButton setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
+    [followButton setImage:[UIImage imageNamed:icon] forState:UIControlStateDisabled];
+    [followButton setTitle:@"" forState:UIControlStateNormal];
     // this is my profile
     [followButton setHidden:NO];
     if ([object.actor.objectId isEqualToString:[[ConnectionManager sharedManager] userObject].objectId])

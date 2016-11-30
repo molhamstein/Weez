@@ -346,9 +346,9 @@
     FOLLOWING_STATE state = [activeUser getFollowingState];
     NSString *icon = @"friendFollowIcon";
     switch (state) {
-//            case REQUESTED:
-//                icon = @"friendFollowIconPending";
-//            break;
+            case REQUESTED:
+                icon = @"friendFollowIconPending";
+            break;
             case FOLLOWING:
                 icon = @"friendFollowIconActive";
             break;
@@ -362,13 +362,12 @@
     [followBtn setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
     [followBtn setImage:[UIImage imageNamed:icon] forState:UIControlStateDisabled];
     [followBtn setTitle:@"" forState:UIControlStateNormal];
-    
 }
 // Follow user
 -(IBAction)followAction:(id)sender{
     UIButton *senderBtn = (UIButton*) sender;
     [senderBtn setEnabled:NO];
-    [[ConnectionManager sharedManager].userObject followFriend:activeUser.userId];
+    [[ConnectionManager sharedManager].userObject followFriend:activeUser.userId withPrivateProfile:activeUser.isPrivate];
     // animate the pressed voted image
     senderBtn.alpha = 1.0;
     [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^
@@ -389,7 +388,7 @@
               [sender setEnabled:YES];
           }];
      }];
-    // follow/unfollow user
+    // follow/unfollow user OR request/cancel follow request
     [[ConnectionManager sharedManager] followUser:activeUser.userId success:^(void)
      {
          // notify about timeline changes

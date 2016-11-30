@@ -40,16 +40,25 @@
     // hide mention image
     [mentionImageView setHidden:YES];
     // follow/unfollow this user
-    [followButton setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateNormal];
-    [followButton setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateDisabled];
-    [followButton setTitle:@"" forState:UIControlStateNormal];
-    // following this friend
-    if ([friendObject isFollowing])
-    {
-        [followButton setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateNormal];
-        [followButton setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateDisabled];
-        [followButton setTitle:@"" forState:UIControlStateNormal];          
+    FOLLOWING_STATE state = [friendObject getFollowingState];
+    NSString *icon = @"friendFollowIcon";
+    switch (state) {
+        case REQUESTED:
+            icon = @"friendFollowIconPending";
+            break;
+        case FOLLOWING:
+            icon = @"friendFollowIconActive";
+            break;
+        case NOT_FOLLOWING:
+            icon = @"friendFollowIcon";
+            break;
+            
+        default:
+            break;
     }
+    [followButton setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
+    [followButton setImage:[UIImage imageNamed:icon] forState:UIControlStateDisabled];
+    [followButton setTitle:@"" forState:UIControlStateNormal];
     // this is my profile
     [followButton setHidden:NO];
     if ([friendObject.objectId isEqualToString:[[ConnectionManager sharedManager] userObject].objectId])

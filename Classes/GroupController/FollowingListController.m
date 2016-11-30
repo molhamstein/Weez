@@ -85,6 +85,31 @@
     [[AppManager sharedManager] flipViewDirection:usersTableView];
 }
 
+-(void) updateFollowBtn :(UIButton*)followBtn
+{
+    int rowIndex = (int)followBtn.tag;
+    Friend *friendObj = [filteredList objectAtIndex:rowIndex];
+    FOLLOWING_STATE state = [friendObj getFollowingState];
+    NSString *icon = @"friendFollowIcon";
+    switch (state) {
+        case REQUESTED:
+            icon = @"friendFollowIconPending";
+            break;
+        case FOLLOWING:
+            icon = @"friendFollowIconActive";
+            break;
+        case NOT_FOLLOWING:
+            icon = @"friendFollowIcon";
+            break;
+            
+        default:
+            break;
+    }
+    [followBtn setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
+    [followBtn setImage:[UIImage imageNamed:icon] forState:UIControlStateDisabled];
+    [followBtn setTitle:@"" forState:UIControlStateNormal];
+}
+
 // Cancel action
 - (void)cancelAction
 {
@@ -179,7 +204,7 @@
     [sender setEnabled:NO];
     int rowIndex = (int)sender.tag;
     Friend *friendObj = [filteredList objectAtIndex:rowIndex];
-    [[ConnectionManager sharedManager].userObject followFriend:friendObj.objectId];
+    [[ConnectionManager sharedManager].userObject followFriend:friendObj.objectId withPrivateProfile:friendObj.isPrivate];
     // animate the pressed voted image
     sender.alpha = 1.0;
     [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^
@@ -189,14 +214,7 @@
     }
     completion:^(BOOL finished)
     {
-        // follow/unfollow this user
-        [sender setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateNormal];
-        [sender setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateDisabled];
-        if ([friendObj isFollowing])
-        {
-            [sender setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateNormal];
-            [sender setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateDisabled];
-        }
+        [self updateFollowBtn:sender];
         [UIView animateWithDuration:0.1 delay:0.0 options: UIViewAnimationOptionTransitionCrossDissolve animations:^
         {
             sender.alpha = 1.0;

@@ -873,7 +873,7 @@ CGFloat anchorSize = 20;
      }
                      completion:^(BOOL finished)
      {
-         // follow/unfollow this user
+         // follow/unfollow this event
          [sender setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateNormal];
          [sender setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateDisabled];
          if ([event isFollowing])

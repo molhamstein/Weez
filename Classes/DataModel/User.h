@@ -76,6 +76,7 @@
 - (void)updateUserInfo:(NSDictionary*)jsonObject;
 - (NSString*)getProfilePicLink;
 - (void)followFriend:(NSString*)friendId;
+- (void)followFriend:(NSString*)friendId withPrivateProfile:(BOOL)hasPrivateProfile;
 - (void)followLocation:(NSString*)locationId;
 - (BOOL)isFollowingLocation:(NSString *)locationId;
 - (void)followEvent:(NSString*)eventId;

@@ -152,7 +152,7 @@
     [sender setEnabled:NO];
     int rowIndex = (int)sender.tag;
     Friend *friendObj = [listOfUsers objectAtIndex:rowIndex];
-    [[ConnectionManager sharedManager].userObject followFriend:friendObj.objectId];
+    [[ConnectionManager sharedManager].userObject followFriend:friendObj.objectId withPrivateProfile:friendObj.isPrivate];
     // animate the pressed voted image
     sender.alpha = 1.0;
     [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^
@@ -162,14 +162,27 @@
     }
     completion:^(BOOL finished)
     {
-        // follow/unfollow this user
-        [sender setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateNormal];
-        [sender setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateDisabled];
-        if ([friendObj isFollowing])
-        {
-            [sender setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateNormal];
-            [sender setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateDisabled];
+       
+        FOLLOWING_STATE state = [friendObj getFollowingState];
+        NSString *icon = @"friendFollowIcon";
+        switch (state) {
+            case REQUESTED:
+                icon = @"friendFollowIconPending";
+                break;
+            case FOLLOWING:
+                icon = @"friendFollowIconActive";
+                break;
+            case NOT_FOLLOWING:
+                icon = @"friendFollowIcon";
+                break;
+                
+            default:
+                break;
         }
+        [sender setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:icon] forState:UIControlStateDisabled];
+        [sender setTitle:@"" forState:UIControlStateNormal];
+        
         [UIView animateWithDuration:0.1 delay:0.0 options: UIViewAnimationOptionTransitionCrossDissolve animations:^
         {
             sender.alpha = 1.0;
@@ -207,7 +220,7 @@
      }
                      completion:^(BOOL finished)
      {
-         // follow/unfollow this user
+         // follow/unfollow this location
          [sender setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateNormal];
          [sender setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateDisabled];
          if ([location isFollowing])

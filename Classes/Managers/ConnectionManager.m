@@ -443,8 +443,9 @@ ConnectionManager* m_pgAsyncDataManager = nil;
              NSDictionary *resultDic = responseObject;
              if ((resultDic != nil) && ([[resultDic allKeys] count] > 0))
              {
+                 id inbox = [responseObject objectForKey:@"inbox"];
                  NSMutableArray *arrayNotifications = [[NSMutableArray alloc] init];
-                 NSMutableArray *resultList = (NSMutableArray*)[responseObject objectForKey:@"notifications"];
+                 NSMutableArray *resultList = (NSMutableArray*)[inbox objectForKey:@"notifications"];//followRequests
                  // loop all sections
                  for (NSMutableDictionary *resultObj in resultList)
                  {

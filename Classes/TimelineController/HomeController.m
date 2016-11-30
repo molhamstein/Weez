@@ -398,16 +398,18 @@
     
     NSString *cancelString = [[AppManager sharedManager] getLocalizedString:@"PHOTO_PICKER_CANCEL"];
     NSArray *actionList;
-    if([timeline isFollowing])
-        actionList = @[[[AppManager sharedManager] getLocalizedString:@"HOME_USER_ACTIONS_LOCATIONS"],
-                       [[AppManager sharedManager] getLocalizedString:@"HOME_USER_ACTIONS_UNFOLLOW"],
-                       [[AppManager sharedManager] getLocalizedString:@"HOME_USER_ACTIONS_REPORT"]
-                       ];
-    else
-        actionList = @[[[AppManager sharedManager] getLocalizedString:@"HOME_USER_ACTIONS_LOCATIONS"],
-                       [[AppManager sharedManager] getLocalizedString:@"HOME_USER_ACTIONS_FOLLOW"],
-                       [[AppManager sharedManager] getLocalizedString:@"HOME_USER_ACTIONS_REPORT"]
-                       ];
+    
+    NSString *followString = [[AppManager sharedManager] getLocalizedString:@"HOME_USER_ACTIONS_FOLLOW"] ;
+    if([timeline amAskingForFollow])
+        followString = [[AppManager sharedManager] getLocalizedString:@"HOME_USER_ACTIONS_CANCEL_FOLLOW_REQUEST"];
+    else if ([timeline isFollowing])
+        followString = [[AppManager sharedManager] getLocalizedString:@"HOME_USER_ACTIONS_UNFOLLOW"];
+    
+    
+    actionList = @[[[AppManager sharedManager] getLocalizedString:@"HOME_USER_ACTIONS_LOCATIONS"],
+                    followString,
+                    [[AppManager sharedManager] getLocalizedString:@"HOME_USER_ACTIONS_REPORT"]
+                    ];
     
     IBActionSheet *actionOptions = [[IBActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:cancelString destructiveButtonTitle:nil otherButtonTitlesArray:actionList];
     [actionOptions setFont:[[AppManager sharedManager] getFontType:kAppFontSubtitle]];
@@ -496,7 +498,7 @@
             selectedTimeline = nil;
             [self performSegueWithIdentifier:@"homeUserRelatedLocationsSegue" sender:self];
         }else if (buttonIndex == 1){ // follow
-            [self followActionUser:selectedTimeline.userId];
+            [self followActionUser:selectedTimeline.userId WithPrivateProfile:selectedTimeline.isPrivate];
             selectedTimeline = nil;
         }else if(buttonIndex == 2){
             [self showReportTypesSheetAction:selectedTimeline];
@@ -1136,7 +1138,7 @@
 }
 
 // Follow user
--(IBAction)followActionUser:(NSString*)userId{
+-(IBAction)followActionUser:(NSString*)userId WithPrivateProfile:(BOOL) isPrivate{
     [[ConnectionManager sharedManager].userObject followFriend:userId];
     // follow/unfollow user
     [[ConnectionManager sharedManager] followUser:userId success:^(void){

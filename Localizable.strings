@@ -53,6 +53,8 @@
 "HOME_USER_ACTIONS_FOLLOW_EN"               = "Follow";
 "HOME_USER_ACTIONS_UNFOLLOW_AR"             = "إلغاء المتابعة";
 "HOME_USER_ACTIONS_UNFOLLOW_EN"             = "Unfollow";
+"HOME_USER_ACTIONS_CANCEL_FOLLOW_REQUEST_AR"= "إلغاء طلب المتابعة";
+"HOME_USER_ACTIONS_CANCEL_FOLLOW_REQUEST_EN"= "Cancel following request";
 "HOME_USER_ACTIONS_LOCATIONS_AR"            = "المواقع";
 "HOME_USER_ACTIONS_LOCATIONS_EN"            = "User Locations";
 

@@ -263,6 +263,24 @@
         [followingsList addObject:friendId];
 }
 
+// Request Follow/ Cancel follow request of private friend
+- (void)requestfollowFriend:(NSString*)friendId
+{
+    // unfollow case
+    if ([sentFollowingRequestsList containsObject:friendId])
+        [sentFollowingRequestsList removeObject:friendId];
+    else// follow case
+        [sentFollowingRequestsList addObject:friendId];
+}
+
+- (void)followFriend:(NSString*)friendId withPrivateProfile:(BOOL)hasPrivateProfile
+{
+    if(!hasPrivateProfile)
+        [self followFriend:friendId];
+    else
+        [self requestfollowFriend:friendId];
+}
+
 // Follow/Unfollow location
 - (void)followLocation:(NSString*)locationId
 {

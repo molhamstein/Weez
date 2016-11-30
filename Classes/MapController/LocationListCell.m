@@ -139,11 +139,11 @@
     separatorImageView.hidden = YES;
     if (withFollowing){
         followButton.hidden = NO;
-        // follow/unfollow this user
+        // follow/unfollow this location
         [followButton setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateNormal];
         [followButton setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateDisabled];
         [followButton setTitle:@"" forState:UIControlStateNormal];
-        // following this friend
+        // following this location
         if ([locationObject isFollowing])
         {
             [followButton setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateNormal];

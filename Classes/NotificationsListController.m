@@ -283,10 +283,11 @@
     [sender setEnabled:NO];
     int rowIndex = (int)sender.tag;
     AppNotification *notificationObj = [listOfNotifications objectAtIndex:rowIndex];
-    Friend *friendObj = [[Friend alloc] init];
-    friendObj.objectId = notificationObj.actor.objectId;
     
-    [[ConnectionManager sharedManager].userObject followFriend:friendObj.objectId];
+    Friend *friendObject = [[Friend alloc] init];
+    friendObject.objectId = notificationObj.actor.objectId;
+    
+    [[ConnectionManager sharedManager].userObject followFriend:friendObject.objectId withPrivateProfile:friendObject.isPrivate];
     // animate the pressed voted image
     sender.alpha = 1.0;
     [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^
@@ -296,14 +297,28 @@
      }
                      completion:^(BOOL finished)
      {
-         // follow/unfollow this user
-         [sender setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateNormal];
-         [sender setImage:[UIImage imageNamed:@"friendFollowIcon"] forState:UIControlStateDisabled];
-         if ([friendObj isFollowing])
-         {
-             [sender setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateNormal];
-             [sender setImage:[UIImage imageNamed:@"friendFollowIconActive"] forState:UIControlStateDisabled];
+         // following this friend
+         FOLLOWING_STATE state = [friendObject getFollowingState];
+         NSString *icon = @"friendFollowIcon";
+         switch (state) {
+             case REQUESTED:
+                 icon = @"friendFollowIconPending";
+                 break;
+             case FOLLOWING:
+                 icon = @"friendFollowIconActive";
+                 break;
+             case NOT_FOLLOWING:
+                 icon = @"friendFollowIcon";
+                 break;
+                 
+             default:
+                 break;
          }
+         [sender setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
+         [sender setImage:[UIImage imageNamed:icon] forState:UIControlStateDisabled];
+         [sender setTitle:@"" forState:UIControlStateNormal];
+
+         
          [UIView animateWithDuration:0.1 delay:0.0 options: UIViewAnimationOptionTransitionCrossDissolve animations:^
           {
               sender.alpha = 1.0;
@@ -315,7 +330,7 @@
           }];
      }];
     // follow/unfollow user
-    [[ConnectionManager sharedManager] followUser:friendObj.objectId success:^(void)
+    [[ConnectionManager sharedManager] followUser:friendObject.objectId success:^(void)
      {
          // notify about timeline changes
          [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TIMELINE_CHANGED object:nil userInfo:nil];
