@@ -1,0 +1,684 @@
+//
+//  Localizable.strings
+//  Weez
+//
+//  Created by Hani Abu Shaer on 10/12/15.
+//  Copyright © 2015 AlphaApps. All rights reserved.
+//
+
+// Navigation
+"NAV_SIGNIN_TITLE_AR"                       = "تسجيل الدخول";
+"NAV_SIGNIN_TITLE_EN"                       = "Sign in";
+"NAV_SIGNUP_TITLE_AR"                       = "حساب جديد";
+"NAV_SIGNUP_TITLE_EN"                       = "Sign up";
+"NAV_RESET_PASSWORD_TITLE_AR"               = "كلمة المرور";
+"NAV_RESET_PASSWORD_TITLE_EN"               = "Forget password";
+"NAV_SET_USERNAME_TITLE_AR"                 = "اختيار اسم المستخدم";
+"NAV_SET_USERNAME_TITLE_EN"                 = "Choose username";
+"NAV_HOME_TITLE_AR"                         = "WEEZ";
+"NAV_HOME_TITLE_EN"                         = "WEEZ";
+"NAV_SETTINGS_TITLE_AR"                     = "الإعدادات";
+"NAV_SETTINGS_TITLE_EN"                     = "Settings";
+"NAV_ADD_FRIEND_TITLE_AR"                   = "البحث";
+"NAV_ADD_FRIEND_TITLE_EN"                   = "Search";
+"NAV_MAP_TITLE_AR"                          = "الخريطة";
+"NAV_MAP_TITLE_EN"                          = "Map";
+
+// Messages
+"MSG_CONNECTION_ERROR_AR"                   = "لايوجد اتصال، يرجى التأكد من الإعدادات";
+"MSG_CONNECTION_ERROR_EN"                   = "No internet connection, please check your phone settings";
+"MSG_LOGIN_ERROR_AR"                        = "فشلت عملية تسجيل الدخول، يرجى إعادة المحاولة";
+"MSG_LOGIN_ERROR_EN"                        = "Login failed, please try again";
+"MSG_LOGIN_ERROR_PSW_AR"                    = "فشلت عملية تسجيل الدخول، تحقق من كلمة المرور";
+"MSG_LOGIN_ERROR_PSW_EN"                    = "Login failed, please check your password";
+"MSG_LOGIN_ERROR_EMAIL_AR"                  = "فشلت عملية تسجيل الدخول، البريد الالكتروني غير مسجل مسبقا";
+"MSG_LOGIN_ERROR_EMAIL_EN"                  = "Login failed, email not registred before";
+"MSG_REPORTED_SUCCESS_AR"                   = "تم التبليغ بنجاح";
+"MSG_REPORTED_SUCCESS_EN"                   = "Reported successfully, your report will be reviewed";
+
+
+// Home
+"HOME_NO_TIMELINES_AR"                      = "لا يوجد أحداث لعرضها";
+"HOME_NO_TIMELINES_EN"                      = "No timelines to show";
+"HOME_SEARCH_PLACEHOLDER_AR"                = "بحث";
+"HOME_SEARCH_PLACEHOLDER_EN"                = "Search";
+"HOME_ACTIONS_ADD_FRIEND_AR"                = "اضافة صديق";
+"HOME_ACTIONS_ADD_FRIEND_EN"                = "Add Friend";
+"HOME_ACTIONS_CREATE_GRP_AR"                = "انشاء مجموعة";
+"HOME_ACTIONS_CREATE_GRP_EN"                = "Create Group";
+
+"HOME_USER_ACTIONS_REPORT_AR"               = "تبليغ";
+"HOME_USER_ACTIONS_REPORT_EN"               = "Report";
+"HOME_USER_ACTIONS_FOLLOW_AR"               = "متابعة";
+"HOME_USER_ACTIONS_FOLLOW_EN"               = "Follow";
+"HOME_USER_ACTIONS_UNFOLLOW_AR"             = "إلغاء المتابعة";
+"HOME_USER_ACTIONS_UNFOLLOW_EN"             = "Unfollow";
+"HOME_USER_ACTIONS_LOCATIONS_AR"            = "المواقع";
+"HOME_USER_ACTIONS_LOCATIONS_EN"            = "User Locations";
+
+"HOME_SECTION_MESSAGES_AR"                  = "المحادثات";
+"HOME_SECTION_MESSAGES_EN"                  = "Messages";
+"HOME_SECTION_STORIES_AR"                   = "الوسائط";
+"HOME_SECTION_STORIES_EN"                   = "Stories";
+"HOME_SECTION_SHOW_MORE_EN"                 = "Show more";
+"HOME_SECTION_SHOW_MORE_AR"                 = "المزيد";
+
+//Messages list
+"MESSAGES_SEARCH_PLACEHOLDER_AR"            = "البحث عن مستخدم أو مجموعة";
+"MESSAGES_SEARCH_PLACEHOLDER_EN"            = "Search user or group";
+
+// Sign in
+"SIGNIN_RECOVERY_ACTION_AR"                 = "استعادة كلمة المرور؟";
+"SIGNIN_RECOVERY_ACTION_EN"                 = "Recover Password?";
+"SIGNIN_EMAIL_FIELD_AR"                     = "البريد";
+"SIGNIN_EMAIL_FIELD_EN"                     = "Email";
+"SIGNIN_USERNAME_FIELD_AR"                  = "اسم المستخدم";
+"SIGNIN_USERNAME_FIELD_EN"                  = "Username";
+"SIGNIN_PASSWORD_FIELD_AR"                  = "كلمة المرور";
+"SIGNIN_PASSWORD_FIELD_EN"                  = "Password";
+"SIGNIN_NUMBER_FIELD_AR"                    = "الجوال";
+"SIGNIN_NUMBER_FIELD_EN"                    = "Number";
+"SIGNIN_EMAIL_PLACEHOLDER_AR"               = "أدخل البريد الالكتروني";
+"SIGNIN_EMAIL_PLACEHOLDER_EN"               = "Enter your email address";
+"SIGNIN_USERNAME_PLACEHOLDER_AR"            = "أدخل اسم المستخدم";
+"SIGNIN_USERNAME_PLACEHOLDER_EN"            = "Enter your username";
+"SIGNIN_PASSWORD_PLACEHOLDER_AR"            = "أدخل كلمة المرور";
+"SIGNIN_PASSWORD_PLACEHOLDER_EN"            = "Enter your password";
+"SIGNIN_NUMBER_PLACEHOLDER_AR"              = "أدخل رقم الجوال";
+"SIGNIN_NUMBER_PLACEHOLDER_EN"              = "Enter your number";
+"SIGNIN_NUMBER2_PLACEHOLDER_AR"             = "أدخل رقم الجوال (اختياري)";
+"SIGNIN_NUMBER2_PLACEHOLDER_EN"             = "Enter your number (optional)";
+"SIGNIN_LOGIN_ACTION_AR"                    = "تسجيل الدخول";
+"SIGNIN_LOGIN_ACTION_EN"                    = "Login";
+"SIGNIN_PASSWORD_SHORT_AR"                  = "يجب أن تتألف كلمة المرور من ٦ محارف على الأقل";
+"SIGNIN_PASSWORD_SHORT_EN"                  = "Your password should be at least 6 characters";
+"SIGNIN_EMAIL_ERROR_AR"                     = "الرجاء إدخال بريد الكتروني صحيح";
+"SIGNIN_EMAIL_ERROR_EN"                     = "Please enter a valid email address";
+"SIGNIN_USERNAME_SHORT_ERROR_AR"            = "يجب أن يتألف اسم المستخدم من ٥ محارف على الأقل";
+"SIGNIN_USERNAME_SHORT_ERROR_EN"            = "Your username should be at least 5 characters";
+"SIGNIN_LOGIN_FACEBOOK_AR"                  = "تسجيل دخول عبر الفيسبوك";
+"SIGNIN_LOGIN_FACEBOOK_EN"                  = "Sign in with Facebook";
+"SIGNIN_LOGIN_EMAIL_AR"                     = "تسجيل حساب عبر البريد الالكتروني";
+"SIGNIN_LOGIN_EMAIL_EN"                     = "Sign up with Email";
+"SIGNIN_LOGIN_FOOTER_AR"                    = "ليس لديك حساب سابق؟ تسجيل دخول !";
+"SIGNIN_LOGIN_FOOTER_EN"                    = "Don't have an account? Sign up.";
+
+// Signup
+"SIGNUP_LOGIN_ACTION_AR"                    = "إنشاء حساب";
+"SIGNUP_LOGIN_ACTION_EN"                    = "Create Account";
+"SIGNUP_USERNAME_USED_AR"                   = "اسم المستخدم أو البريد الالكتروني مسجل مسبقاً";
+"SIGNUP_USERNAME_USED_EN"                   = "Username or email is already registered";
+"SIGNUP_USERNAME_INVALID_AR"                = "يرجى إدخال اسم مستخدم صحيح";
+"SIGNUP_USERNAME_INVALID_EN"                = "Please enter a valid username";
+"SIGNUP_DISPLAYNAME_EMPTY_AR"               = "يرجى إدخال اسم الحساب";
+"SIGNUP_DISPLAYNAME_EMPTY_EN"               = "Please enter a display name";
+
+// Reset Password
+"RESET_RECOVERY_DESC_AR"                    = "أدخل البريد أو الرقم لاستعادة كلمة المرور";
+"RESET_RECOVERY_DESC_EN"                    = "Enter email or number to recover password";
+"RESET_RECOVERY_ACTION_AR"                  = "استعادة كلمة المرور";
+"RESET_RECOVERY_ACTION_EN"                  = "Recover Password";
+"RESET_EMAIL_ERROR_AR"                      = "البريد الالكتروني غير مستخدم، يرجى التأكد وإعادة المحاولة";
+"RESET_EMAIL_ERROR_EN"                      = "Email address is not used before, please check and try again";
+"RESET_NUMBER_ERROR_AR"                     = "رقم الجوال غير مستخدم، يرجى التأكد وإعادة المحاولة";
+"RESET_NUMBER_ERROR_EN"                     = "The number is not used before, please check and try again";
+"RESET_RECOVERY_SUCCESS_AR"                 = "لقد تم بنجاح إرسال كلمة مرور جديدة إليك";
+"RESET_RECOVERY_SUCCESS_EN"                 = "New password was sent successfully to you";
+
+// Set Username
+"SET_USERNAME_ACTION_AR"                    = "حفظ اسم المستخدم";
+"SET_USERNAME_ACTION_EN"                    = "Save Username";
+"SET_USERNAME_DESC_AR"                      = "اختر اسم المستخدم الخاص بك";
+"SET_USERNAME_DESC_EN"                      = "Choose your Weez username";
+"SET_USERNAME_ERROR_AR"                     = "اسم المستخدم مسجل مسبقاً، يرجى تغيير الاسم وإعادة المحاولة";
+"SET_USERNAME_ERROR_EN"                     = "Username is already registered, please choose another one";
+
+// Intro
+"INTRO_PAGE_TITLE1_AR"                      = "التقط فيديو";
+"INTRO_PAGE_TITLE1_EN"                      = "SHOOT VIDEO";
+"INTRO_PAGE_DESCRIPTION1_AR"                = "أظهر لأصدقائك ماذا تفعل";
+"INTRO_PAGE_DESCRIPTION1_EN"                = "Show what you are doing";
+"INTRO_PAGE_TITLE2_AR"                      = "التقط صورة";
+"INTRO_PAGE_TITLE2_EN"                      = "TAKE PHOTO";
+"INTRO_PAGE_DESCRIPTION2_AR"                = "شارك صورك مع الأصدقاء";
+"INTRO_PAGE_DESCRIPTION2_EN"                = "Create photo reports";
+"INTRO_PAGE_TITLE3_AR"                      = "تابع الأحداث";
+"INTRO_PAGE_TITLE3_EN"                      = "WATCH TIMELINES";
+"INTRO_PAGE_DESCRIPTION3_AR"                = "تابع ماذا يفعل أصدقاؤك";
+"INTRO_PAGE_DESCRIPTION3_EN"                = "See what others are doing";
+
+// Facebook Errors
+"FACEBOOK_ERROR_TITLE1_AR"                  = "حدث خطأ";
+"FACEBOOK_ERROR_TITLE1_ER"                  = "Facebook Error";
+"FACEBOOK_ERROR_TITLE2_AR"                  = "إلغاء تسجيل الدخول";
+"FACEBOOK_ERROR_TITLE2_EN"                  = "Login Canceled";
+"FACEBOOK_ERROR_TITLE3_AR"                  = "سماحية المشاركة";
+"FACEBOOK_ERROR_TITLE3_EN"                  = "Sharing Permissions";
+"FACEBOOK_ERROR_MSG1_AR"                    = "حدث خطأ بعملية تسجيل الدخول، يرجى إعادة المحاولة";
+"FACEBOOK_ERROR_MSG1_EN"                    = "Login failed, please try again";
+"FACEBOOK_ERROR_MSG2_AR"                    = "يرجى إتمام عملية تسجيل الدخول، لتتمكن من استخدام التطبيق";
+"FACEBOOK_ERROR_MSG2_EN"                    = "Please login to continue using the application";
+"FACEBOOK_ERROR_MSG3_AR"                    = "حدث خطأ بالحصول على سماحية المشاركة، يرجى إعادة المحاولة";
+"FACEBOOK_ERROR_MSG3_EN"                    = "Sharing permissions failed, please try again";
+"FACEBOOK_ERROR_MSG4_AR"                    = "يرجى منح التطبيق سماحية المشاركة، لتتمكن من الاستفادة من هذه الميزة";
+"FACEBOOK_ERROR_MSG4_EN"                    = "Please allow sharing permissions, to use this option inside the application";
+"FACEBOOK_ERROR_ACTION_AR"                  = "موافق";
+"FACEBOOK_ERROR_ACTION_EN"                  = "OK";
+
+// TODO change Keys to "Search"
+// Add Friend
+"ADD_FRIEND_DESC_AR"                        = "ابحث عن مستخدمين، أماكن و وسوم";
+"ADD_FRIEND_DESC_EN"                        = "Search for Users, Locations, Hashtags";
+"ADD_FRIEND_PLACEHOLDER_AR"                 = "ابحث عن مستخدمين، أماكن و وسوم";
+"ADD_FRIEND_PLACEHOLDER_EN"                 = "Search for Users, Locations, Hashtags";
+"ADD_FRIEND_NO_RESULT_AR"                   = "لا توجد نتائج بحث";
+"ADD_FRIEND_NO_RESULT_EN"                   = "No search results";
+"SEARCH_TAGS_MEDIA_COUNT_AR"                = "%lu";
+"SEARCH_TAGS_MEDIA_COUNT_EN"                = "%lu Posts";
+
+// Add mention
+"ADD_MENTION_DESC_AR"                        = "ابحث ضمن قائمة المتابَعين";
+"ADD_MENTION_DESC_EN"                        = "Search in following list";
+"ADD_MENTION_PLACEHOLDER_AR"                 = "البحث عن مستخدم";
+"ADD_MENTION_PLACEHOLDER_EN"                 = "Search user";
+"ADD_MENTION_NO_RESULT_AR"                   = "لا يوجد متابَعين";
+"ADD_MENTION_NO_RESULT_EN"                   = "No following users";
+
+// Following/Followers list
+"FOLLOWING_SEARCH_DESC_AR"                   = "ابحث ضمن قائمة المتابَعين";
+"FOLLOWING_SEARCH_DESC_EN"                   = "Search in following list";
+"FOLLOWING_NO_RESULT_AR"                     = "لا يوجد متابَعين";
+"FOLLOWING_NO_RESULT_EN"                     = "No following users";
+"FOLLOWERS_SEARCH_DESC_AR"                   = "ابحث ضمن قائمة المتابِعين";
+"FOLLOWERS_SEARCH_DESC_EN"                   = "Search in followers list";
+"FOLLOWERS_NO_RESULT_AR"                     = "لا يوجد متابِعين";
+"FOLLOWERS_NO_RESULT_EN"                     = "No followers";
+
+// Timeline
+"TIMELINE_DURATION_TITLE_AR"                = "الفترة";
+"TIMELINE_DURATION_TITLE_EN"                = "Duration";
+"TIMELINE_WATCHED_TITLE_AR"                 = "المشاهدة";
+"TIMELINE_WATCHED_TITLE_EN"                 = "Viewed";
+"TIMELINE_LOCATION_TITLE_AR"                = "المواقع";
+"TIMELINE_LOCATION_TITLE_EN"                = "Locations";
+"TIMELINE_MENTION_TITLE_AR"                 = "من قبل";
+"TIMELINE_MENTION_TITLE_EN"                 = "Mentioned By";
+"TIMELINE_BOOSTED_TITLE_AR"                 = "من قبل";
+"TIMELINE_BOOSTED_TITLE_EN"                 = "Boosted By";
+"TIMELINE_SHARE_ACTION_AR"                  = "مشاركة";
+"TIMELINE_SHARE_ACTION_EN"                  = "Share";
+"TIMELINE_BOOST_ACTION_AR"                  = "دعم";
+"TIMELINE_BOOST_ACTION_EN"                  = "Boost";
+"TIMELINE_MENTION_ACTION_AR"                = "تنويه";
+"TIMELINE_MENTION_ACTION_EN"                = "Mention";
+"TIMELINE_BOOST_SUCCESS_AR"                 = "لقد تمت عملية الدعم بنجاح";
+"TIMELINE_BOOST_SUCCESS_EN"                 = "Media was boosted successfully";
+"TIMELINE_MENTION_SUCCESS_AR"               = "لقد تمت عملية التنويه بنجاح";
+"TIMELINE_MENTION_SUCCESS_EN"               = "Mention was successful";
+"TIMELINE_SHARE_FAILED_AR"                  = "فشلت عملية المشاركة، يرجى إعادة المحاولة";
+"TIMELINE_SHARE_FAILED_EN"                  = "Media sharing was failed, please try again";
+"TIMELINE_SHARE_SUCCESS_AR"                 = "لقد تمت عملية المشاركة بنجاح";
+"TIMELINE_SHARE_SUCCESS_EN"                 = "Media was shared successful";
+"TIMELINE_COPYLINK_SUCCESS_AR"              = "لقد تمت عملية نسخ الرابط بنجاح";
+"TIMELINE_COPYLINK_SUCCESS_EN"              = "Media link was copied successful";
+"TIMELINE_PRIVATE_CONTENT_EN"               = "Sorry, This content is private.";
+"TIMELINE_PRIVATE_CONTENT_AR"               = "عذراً، هذا المحتوى خاص.";
+// delete media
+"TIMELINE_DELETE_MEDIA_TITLE_AR"             = "حذف الوسائط";
+"TIMELINE_DELETE_MEDIA_TITLE_EN"             = "Delete Media";
+"TIMELINE_DELETE_MEDIA_MSG_AR"               = "هل أنت متأكد من حذف الوسائط؟";
+"TIMELINE_DELETE_MEDIA_MSG_EN"               = "Are you sure you want to delete the media?";
+"TIMELINE_DELETE_MEDIA_ACTION_AR"            = "حذف";
+"TIMELINE_DELETE_MEDIA_ACTION_EN"            = "Delete";
+"TIMELINE_DELETE_MEDIA_SUCCESS_AR"            = "لقد قمت بحذف الوسائط";
+"TIMELINE_DELETE_MEDIA_SUCCESS_EN"            = "You have delete the media";
+
+// Map
+"MAP_TRENDING_AR"                           = "المتداوَلة";
+"MAP_TRENDING_EN"                           = "trending";
+"MAP_FOLLOWED_AR"                           = "المفضلة";
+"MAP_FOLLOWED_EN"                           = "you";
+
+// location details
+"LOCATION_DETAILS_FOLLOWERS_AR"             = "{count} متابعون ";
+"LOCATION_DETAILS_FOLLOWERS_EN"             = "{count} Subscribers";
+"LOCATION_DETAILS_DESC_AR"                  = "ابحث ضمن قائمة المواقع";
+"LOCATION_DETAILS_DESC_EN"                  = "Search in locations list";
+"LOCATION_DETAILS_PLACEHOLDER_AR"           = "البحث عن موقع";
+"LOCATION_DETAILS_PLACEHOLDER_EN"           = "Search location";
+"LOCATION_DETAILS_NO_RESULT_AR"             = "لا يوجد مواقع";
+"LOCATION_DETAILS_NO_RESULT_EN"             = "No locations";
+"LOCATION_STATUS_PENDING_AR"                = "قيد المراجعة";
+"LOCATION_STATUS_PENDING_EN"                = "Pending";
+"LOCATION_STATUS_APPROVED_AR"               = "موافق عليه";
+"LOCATION_STATUS_APPROVED_EN"               = "Approved";
+"LOCATION_STATUS_REJECTED_AR"               = "مرفوض";
+"LOCATION_STATUS_REJECTED_EN"               = "Rejected";
+"LOCATION_DETAILS_TITLE_AR"                 = "معلومات الموقع";
+"LOCATION_DETAILS_TITLE_EN"                 = "Location Details";
+"LOCATION_DETAILS_SAVE_AR"                  = "حفظ الموقع";
+"LOCATION_DETAILS_SAVE_EN"                  = "Save Location";
+"LOCATION_DETAILS_NAME_FIELD_AR"            = "اسم الموقع";
+"LOCATION_DETAILS_NAME_FIELD_EN"            = "Location Name";
+"LOCATION_DETAILS_NAME_PLACEHOLDER_AR"      = "أدخل اسم الموقع";
+"LOCATION_DETAILS_NAME_PLACEHOLDER_EN"      = "Enter location name";
+"LOCATION_DETAILS_ADDRESS_FIELD_AR"         = "العنوان";
+"LOCATION_DETAILS_ADDRESS_FIELD_EN"         = "Address";
+"LOCATION_DETAILS_ADDRESS_PLACEHOLDER_AR"   = "أدخل عنوان الموقع";
+"LOCATION_DETAILS_ADDRESS_PLACEHOLDER_EN"   = "Enter location address";
+"LOCATION_DETAILS_SUCCESS_AR"               = "لقد تمت عملية حفظ الموقع بنجاح";
+"LOCATION_DETAILS_SUCCESS_EN"               = "Your location was saved successfully";
+"LOCATION_DETAILS_FRIENDS_AR"               = "الأصدقاء";
+"LOCATION_DETAILS_FRIENDS_EN"               = "Friends";
+"LOCATION_DETAILS_ALL_AR"                   = "الجميع";
+"LOCATION_DETAILS_ALL_EN"                   = "All";
+
+//profile
+"PROFILE_FOLLOWING_TITLE_AR"                = "المتابَعون";
+"PROFILE_FOLLOWING_TITLE_EN"                = "Following";
+"PROFILE_FOLLOWERS_TITLE_AR"                = "المتابِعون";
+"PROFILE_FOLLOWERS_TITLE_EN"                = "Followers";
+"PROFILE_YOUR_TIMELINE_AR"                  = "تسجيلاتك";
+"PROFILE_YOUR_TIMELINE_EN"                  = "Timeline";
+"PROFILE_USER_TIMELINE_AR"                  = "التسجيلات";
+"PROFILE_USER_TIMELINE_EN"                  = "Timeline";
+"PROFILE_BOOSTING_TIMELINES_AR"             = "التسجيلات المفضلة";
+"PROFILE_BOOSTING_TIMELINES_EN"             = "Boosting";
+"PROFILE_FAV_LOCATIONS_AR"                  = "المواقع المفضلة";
+"PROFILE_FAV_LOCATIONS_EN"                  = "Locations";
+"PROFILE_BOOSTS_EMPTY_AR"                   = "لم يتم دعم اي تسجيلات لعرضها هنا";
+"PROFILE_BOOSTS_EMPTY_EN"                   = "No boosted media to show here";
+"PROFILE_FAV_LOCATIONS_EMPTY_AR"            = "لا يوجد مواقع مفضلة لعرضها";
+"PROFILE_FAV_LOCATIONS_EMPTY_EN"            = "No favorite locations to show here";
+"PROFILE_TIMELINE_EMPTY_AR"                 = "لم يتم تسجيل اي فيديو لعرضه هنا";
+"PROFILE_TIMELINE_EMPTY_EN"                 = "No media to show in this Timeline";
+"PROFILE_PRIVATE_CONTENT_EN"                = "This account is private\nFollow to see their photos and videos.";
+"PROFILE_PRIVATE_CONTENT_AR"                = "هذا الحساب خاص\nيمكنك المتابعة لمشاهدة الوسائط والفيديوهات.";
+
+"PREF_EDIT_PHOTO_EN"                        = "Edit";
+"PREF_EDIT_PHOTO_AR"                        = "تعديل";
+"PREF_PRIVATE_PROFILE_EN"                   = "Private profile";
+"PREF_PRIVATE_PROFILE_AR"                   = "خصوصية الحساب";
+
+
+//Settings
+"SETTINGS_PROFILE_SETTINGS_AR"              = "معلومات الحساب";
+"SETTINGS_PROFILE_SETTINGS_EN"              = "Profile";
+"SETTINGS_APP_SETTINGS_AR"                  = "إعدادات التطبيق";
+"SETTINGS_APP_SETTINGS_EN"                  = "Settings";
+"SETTINGS_FOLLOWERS_EN"                     = "Followers";
+"SETTINGS_FOLLOWERS_AR"                     = "قائمة المتابِعون";
+"SETTINGS_FOLLOWING_EN"                     = "Following";
+"SETTINGS_FOLLOWING_AR"                     = "قائمة المتابَعون";
+"SETTINGS_LOCATIONS_EN"                     = "Locations";
+"SETTINGS_LOCATIONS_AR"                     = "قائمة المواقع";
+"SETTINGS_MENTIONS_EN"                      = "Mentions";
+"SETTINGS_MENTIONS_AR"                      = "قائمة التنويهات";
+"SETTINGS_EVENTS_EN"                        = "Events";
+"SETTINGS_EVENTS_AR"                        = "قائمة الأحداث";
+"SETTINGS_GROUPS_EN"                        = "Groups";
+"SETTINGS_GROUPS_AR"                        = "قائمة المجموعات";
+"SETTINGS_EDIT_AR"                          = "تعديل معلومات الحساب";
+"SETTINGS_EDIT_EN"                          = "Edit Profile";
+"SETTINGS_NOTIFICATIONS_AR"                 = "التنبيهات";
+"SETTINGS_NOTIFICATIONS_EN"                 = "Notifications";
+"SETTINGS_SECURITY_AR"                      = "الخيارات و التنبيهات";
+"SETTINGS_SECURITY_EN"                      = "Preferences & Notifications";
+"SETTINGS_NOTIFICATION_BOOSTS_AR"           = "قام أحدهم بدعم مقطع";
+"SETTINGS_NOTIFICATION_BOOSTS_EN"           = "Someone Boosted Video";
+"SETTINGS_NOTIFICATION_MENTIONS_AR"         = "قام أحدهم بالتنويه لي";
+"SETTINGS_NOTIFICATION_MENTIONS_EN"         = "Someone Mentioned Me";
+"SETTINGS_NOTIFICATION_GRP_MSG_AR"          = "رسالة جديدة";
+"SETTINGS_NOTIFICATION_GRP_MSG_EN"          = "New Message";
+"SETTINGS_NOTIFICATION_NEW_FOLLOWER_AR"     = "متابع جديد";
+"SETTINGS_NOTIFICATION_NEW_FOLLOWER_EN"     = "New Follower";
+
+// preferences
+"PREF_TITLE_PREF_EN"                        = "Preferences";
+"PREF_TITLE_PREF_AR"                        = "الخيارات";
+"PREF_TITLE_NOTIFICATIONS_EN"               = "Notifications";
+"PREF_TITLE_NOTIFICATIONS_AR"               = "التنبيهات";
+"PREF_IMG_DURATION_TITLE_EN"                = "Duration";
+"PREF_IMG_DURATION_TITLE_AR"                = "الزمن";
+"PREF_IMG_DURATION_EN"                      = "Timeline Photo Duration";
+"PREF_IMG_DURATION_AR"                      = "زمن عرض الصور";
+"PREF_LANG_EN"                              = "Language";
+"PREF_LANG_AR"                              = "اللغة";
+"PREF_CHAT_PRIVACY_EN"                      = "Chat Privacy";
+"PREF_CHAT_PRIVACY_AR"                      = "خصوصية المحادثات";
+"PREF_CHANGE_PSW_EN"                        = "Change Password";
+"PREF_CHANGE_PSW_AR"                        = "تغير كلمة المرور";
+"PREF_LOGOUT_EN"                            = "Logout";
+"PREF_LOGOUT_AR"                            = "تسجيل الخروج";
+"PREF_LANG_AR_AR"                           = "العربية";
+"PREF_LANG_AR_EN"                           = "العربية";
+"PREF_LANG_EN_AR"                           = "English";
+"PREF_LANG_EN_EN"                           = "English";
+"PREF_CHAT_PRIVACY_ALL_AR"                  = "متوفر للعامة";
+"PREF_CHAT_PRIVACY_ALL_EN"                  = "Available for anyone";
+"PREF_CHAT_PRIVACY_FOLLOWERS_ONLY_AR"       = "المتابِعون فقط";
+"PREF_CHAT_PRIVACY_FOLLOWERS_ONLY_EN"       = "Follwers only";
+"PREF_CHAT_PRIVACY_FOLLWING_AND_FOLLWERS_AR"= "المتابَعون و المتابِعون";
+"PREF_CHAT_PRIVACY_FOLLWING_AND_FOLLWERS_EN"= "Follwers and Following";
+"PREF_PICKER_OK_EN"                         = "Select";
+"PREF_PICKER_CANCEL_EN"                     = "Cancel";
+"PREF_PICKER_OK_AR"                         = "اختيار";
+"PREF_PICKER_CANCEL_AR"                     = "إلغاء الأمر";
+
+// Edit Profile
+"PROFILE_EDIT_EMAIL_FIELD_AR"               = "البريد الالكتروني";
+"PROFILE_EDIT_EMAIL_FIELD_EN"               = "Email";
+"PROFILE_EDIT_NAME_FIELD_AR"                = "اسم الحساب";
+"PROFILE_EDIT_NAME_FIELD_EN"                = "Display Name";
+"PROFILE_EDIT_NAME_PLACEHOLDER_AR"          = "أدخل اسم الحساب";
+"PROFILE_EDIT_NAME_PLACEHOLDER_EN"          = "Enter your display name";
+"PROFILE_EDIT_SUCCESS_AR"                   = "لقد تمت عملية حفظ التعديلات بنجاح";
+"PROFILE_EDIT_SUCCESS_EN"                   = "Profile settings was updated successfully";
+"PROFILE_EDIT_SAVE_AR"                      = "حفظ";
+"PROFILE_EDIT_SAVE_EN"                      = "Save";
+
+// Change password
+"CHANGE_PASSWORD_OLD_FIELD_AR"              = "الكلمة القديمة";
+"CHANGE_PASSWORD_OLD_FIELD_EN"              = "Old Password";
+"CHANGE_PASSWORD_NEW_FIELD_AR"              = "الكلمة الجديدة";
+"CHANGE_PASSWORD_NEW_FIELD_EN"              = "New Password";
+"CHANGE_PASSWORD_CONFIRM_FIELD_AR"          = "التأكيد";
+"CHANGE_PASSWORD_CONFIRM_FIELD_EN"          = "Confirmation";
+"CHANGE_PASSWORD_OLD_PLACEHOLDER_AR"        = "أدخل كلمة المرور القديمة";
+"CHANGE_PASSWORD_OLD_PLACEHOLDER_EN"        = "Enter your old Password";
+"CHANGE_PASSWORD_NEW_PLACEHOLDER_AR"        = "أدخل كلمة المرور الجديدة";
+"CHANGE_PASSWORD_NEW_PLACEHOLDER_EN"        = "Enter your new Password";
+"CHANGE_PASSWORD_CONFIRM_PLACEHOLDER_AR"    = "أدخل كلمة المرور الجديدة للتأكيد";
+"CHANGE_PASSWORD_CONFIRM_PLACEHOLDER_EN"    = "Confirm your new Password";
+"CHANGE_PASSWORD_NO_MATCH_AR"               = "كلمة المرور الجديدة وتأكيدها غير متطابقتان ";
+"CHANGE_PASSWORD_NO_MATCH_EN"               = "Your new and confirm password didn't match";
+"CHANGE_PASSWORD_NOT_CORRECT_AR"            = "كلمة المرور القديمة غير صحيحة ";
+"CHANGE_PASSWORD_NOT_CORRECT_EN"            = "Your old password is not correct";
+"CHANGE_PASSWORD_SUCCESS_AR"                = "لقد تمت عملية تغيير كلمة المرور بنجاح";
+"CHANGE_PASSWORD_SUCCESS_EN"                = "Your password was updated successfully";
+
+// Camera & Gallery
+"CAMERA_NOT_AVAILABLE_TITLE_AR"             = "الكاميرا غير متوفرة";
+"CAMERA_NOT_AVAILABLE_TITLE_EN"             = "Camera Not Available";
+"CAMERA_NOT_AVAILABLE_MSG_AR"               = "الكاميرا غير مدعومة على هاتفك.";
+"CAMERA_NOT_AVAILABLE_MSG_EN"               = "Camera is not supported on your device.";
+"CAMERA_NOT_AVAILABLE_ACTION_AR"            = "موافق";
+"CAMERA_NOT_AVAILABLE_ACTION_EN"            = "OK";
+"GALLERY_NOT_AVAILABLE_TITLE_AR"            = "معرض الصور غير متوفر";
+"GALLERY_NOT_AVAILABLE_TITLE_EN"            = "Gallery Not Available";
+"GALLERY_NOT_AVAILABLE_MSG_AR"              = "معرض الصور غير متوفر على هاتفك.";
+"GALLERY_NOT_AVAILABLE_MSG_EN"              = "Photo gallery is not available on your device.";
+"GALLERY_NOT_AVAILABLE_ACTION_AR"           = "موافق";
+"GALLERY_NOT_AVAILABLE_ACTION_EN"           = "OK";
+"PHOTO_PICKER_CANCEL_AR"                    = "إلغاء الأمر";
+"PHOTO_PICKER_CANCEL_EN"                    = "Cancel";
+"PHOTO_PICKER_FROM_CAMERA_AR"               = "التقاط صورة";
+"PHOTO_PICKER_FROM_CAMERA_EN"               = "Take Photo";
+"PHOTO_PICKER_FROM_GALLEREY_AR"             = "فتح معرض الصور";
+"PHOTO_PICKER_FROM_GALLEREY_EN"             = "Open Gallery";
+
+// Record media
+"RECORD_MEDIA_PICK_LOCATION_AR"             = "اختر موقع";
+"RECORD_MEDIA_PICK_LOCATION_EN"             = "Pick Location";
+"RECORD_MEDIA_PICK_LOCATION_TOO_FAR_AR"     = "الموقع المختار بعيد جدا عن موقعك الحالي الرجاء اختيار موقع صحيح";
+"RECORD_MEDIA_PICK_LOCATION_TOO_FAR_EN"     = "Picked Location is far from your current location, please pick a near location.";
+"RECORD_MEDIA_PICK_LOCATION_TOO_FAR_OK_AR"  = "موافق";
+"RECORD_MEDIA_PICK_LOCATION_TOO_FAR_OK_EN"  = "Pick Place";
+"RECORD_MEDIA_PICK_LOCATION_TOO_FAR_CNCL_AR"  = "الغاء الامر";
+"RECORD_MEDIA_PICK_LOCATION_TOO_FAR_CNCL_EN"  = "Cancel";
+"RECORD_MEDIA_PICK_LOCATION_NOT_DEF_AR"     = "الموقع المختار ليس معرفا, الرجاء اختيار معرف من الخريطة";
+"RECORD_MEDIA_PICK_LOCATION_NOT_DEF_EN"     = "Picked Location is invalid, select a predefined location from the map.";
+"RECORD_MEDIA_PICK_LOCATION_NOT_DEF_OK_AR"  = "موافق";
+"RECORD_MEDIA_PICK_LOCATION_NOT_DEF_OK_EN"  = "Pick Place";
+"RECORD_MEDIA_PICK_LOCATION_NOT_DEF_CNCL_AR"  = "الغاء الامر";
+"RECORD_MEDIA_PICK_LOCATION_NOT_DEF_CNCL_EN"  = "Cancel";
+"RECORD_MEDIA_UPLOAD_ERROR_AR"              = "فشلت عملية الإرسال، يرجى إعادة المحاولة";
+"RECORD_MEDIA_UPLOAD_ERROR_EN"              = "Upload media failed, please try again";
+"RECORD_MEDIA_UPLOAD_SUCCESS_AR"            = "لقد تمت عملية الإرسال بنجاح";
+"RECORD_MEDIA_UPLOAD_SUCCESS_EN"            = "Media file was uploaded successfully";
+"RECORD_MEDIA_PERMISSION_AR"                = "التطبيق يحتاج الحصول على سماحيات لاستخدام الكاميرا";
+"RECORD_MEDIA_PERMISSION_EN"                = "Please we need permission to use the camera.";
+"RECORD_MEDIA_ADD_TAG_TITLE_EN"             = "Add new Hashtag to this Media";
+"RECORD_MEDIA_ADD_TAG_TITLE_AR"             = "اضافة #وسم";
+"RECORD_MEDIA_ADD_TAG_PLACEHOLDER_EN"       = "Hashtag";
+"RECORD_MEDIA_ADD_TAG_PLACEHOLDER_AR"       = "الوسم#";
+"RECORD_MEDIA_ADD_TAG_OK_EN"                = "Add";
+"RECORD_MEDIA_ADD_TAG_OK_AR"                = "إضافة";
+"RECORD_MEDIA_ADD_TAG_CANCEL_EN"            = "Cancel";
+"RECORD_MEDIA_ADD_TAG_CANCEL_AR"            = "إلغاء الامر";
+
+
+// Group Chat
+"GROUP_DETAILS_TITLE_AR"                    = "معلومات المجموعة";
+"GROUP_DETAILS_TITLE_EN"                    = "Group Details";
+"GROUP_DETAILS_NAME_FIELD_AR"               = "اسم المجموعة";
+"GROUP_DETAILS_NAME_FIELD_EN"               = "Group Name";
+"GROUP_DETAILS_NAME_PLACEHOLDER_AR"         = "أدخل اسم المجموعة";
+"GROUP_DETAILS_NAME_PLACEHOLDER_EN"         = "Enter group name";
+"GROUP_DETAILS_SAVE_AR"                     = "حفظ المجموعة";
+"GROUP_DETAILS_SAVE_EN"                     = "Save Group";
+"GROUP_DETAILS_COUNT_AR"                    = "أعضاء المجموعة {count}";
+"GROUP_DETAILS_COUNT_EN"                    = "Group Members {count}";
+"GROUP_DETAILS_NO_MEMBERS_AR"               = "لا يوجد أعضاء ضمن المجموعة";
+"GROUP_DETAILS_NO_MEMBERS_EN"               = "No members in the group";
+"GROUP_DETAILS_SUCCESS_AR"                  = "لقد تمت عملية حفظ المجموعة بنجاح";
+"GROUP_DETAILS_SUCCESS_EN"                  = "Your group was saved successfully";
+"GROUP_NO_ITEMS_AR"                         = "لا يوجد مجموعات لعرضها";
+"GROUP_NO_ITEMS_EN"                         = "No groups to show";
+"GROUP_DETAILS_LEAVE_TITLE_AR"              = "مغادرة المجموعة";
+"GROUP_DETAILS_LEAVE_TITLE_EN"              = "Leave Group";
+"GROUP_DETAILS_DELETE_TITLE_AR"             = "حذف المجموعة";
+"GROUP_DETAILS_DELETE_TITLE_EN"             = "Delete Group";
+"GROUP_DETAILS_LEAVE_MSG_AR"                = "هل أنت متأكد من مغادرة المجموعة؟";
+"GROUP_DETAILS_LEAVE_MSG_EN"                = "Are you sure you want to leave the group?";
+"GROUP_DETAILS_DELETE_MSG_AR"               = "هل أنت متأكد من حذف المجموعة؟";
+"GROUP_DETAILS_DELETE_MSG_EN"               = "Are you sure you want to delete the group?";
+"GROUP_DETAILS_LEAVE_ACTION_AR"             = "مغادرة";
+"GROUP_DETAILS_LEAVE_ACTION_EN"             = "Leave";
+"GROUP_DETAILS_DELETE_ACTION_AR"            = "حذف";
+"GROUP_DETAILS_DELETE_ACTION_EN"            = "Delete";
+"GROUP_DETAILS_LEAVE_SUCCESS_AR"            = "لقد قمت بمغادرة المجموعة";
+"GROUP_DETAILS_LEAVE_SUCCESS_EN"            = "You have left the group";
+"GROUP_DETAILS_DELETE_SUCCESS_AR"           = "لقد قمت بحذف المجموعة";
+"GROUP_DETAILS_DELETE_SUCCESS_EN"           = "You have deleted the group";
+"GROUP_MEMBERS_DESCRIPTION1_AR"             = "أنت و{name1}";
+"GROUP_MEMBERS_DESCRIPTION1_EN"             = "You and {name1}";
+"GROUP_MEMBERS_DESCRIPTION2_AR"             = "أنت و{name1} و{name2}";
+"GROUP_MEMBERS_DESCRIPTION2_EN"             = "You, {name1} and {name2}";
+"GROUP_MEMBERS_DESCRIPTION3_AR"             = "أنت و{name1} و{number} آخرون";
+"GROUP_MEMBERS_DESCRIPTION3_EN"             = "You, {name1} and {number} others";
+"GROUP_MEMBERS_ME_AR"                       = "أنت";
+"GROUP_MEMBERS_ME_EN"                       = "You";
+"GROUP_MEMBERS_TYPE_PHOTO_AR"               = "صورة";
+"GROUP_MEMBERS_TYPE_PHOTO_EN"               = "Photo";
+"GROUP_MEMBERS_TYPE_VIDEO_AR"               = "فيديو";
+"GROUP_MEMBERS_TYPE_VIDEO_EN"               = "Video";
+"GROUP_MEMBERS_TYPE_AUDIO_AR"               = "تسجيل صوتي";
+"GROUP_MEMBERS_TYPE_AUDIO_EN"               = "Audio";
+"GROUP_MEMBERS_TYPE_LOCATION_AR"            = "مكان";
+"GROUP_MEMBERS_TYPE_LOCATION_EN"            = "Location";
+"GROUP_DETAILS_DESCRIPTION_FIELD_AR"        = "وصف المجموعة";
+"GROUP_DETAILS_DESCRIPTION_FIELD_EN"        = "Group Description";
+"GROUP_DETAILS_DESCRIPTION_PLACEHOLDER_AR"  = "أدخل وصف المجموعة";
+"GROUP_DETAILS_DESCRIPTION_PLACEHOLDER_EN"  = "Enter group description";
+"GROUP_DETAILS_EDIT_AR"                     = "تعديل";
+"GROUP_DETAILS_EDIT_EN"                     = "Edit";
+"GROUP_DETAILS_EXIT_MSG_AR"                 = "حفظ التعديلات قبل الخروج؟";
+"GROUP_DETAILS_EXIT_MSG_EN"                 = "Changes won't be saved, are you sure you want to exit?";
+"GROUP_DETAILS_EXIT_ACTION_AR"              = "موافق";
+"GROUP_DETAILS_EXIT_ACTION_EN"              = "Exit";
+"GROUP_DETAILS_EXIT_CNCL_AR"                = "الغاء الامر";
+"GROUP_DETAILS_EXIT_CNCL_EN"                = "Cancel";
+
+
+
+// Recipients list
+"RECIPIENTS_LIST_TITLE_AR"                  = "إرسال إلى";
+"RECIPIENTS_LIST_TITLE_EN"                  = "Send To";
+"RECIPIENTS_LIST_DESC_AR"                   = "ابحث ضمن قائمة المتابَعين والمجموعات";
+"RECIPIENTS_LIST_DESC_EN"                   = "Search in following list and groups";
+"RECIPIENTS_LIST_PLACEHOLDER_AR"            = "البحث عن مستخدم أو مجموعة";
+"RECIPIENTS_LIST_PLACEHOLDER_EN"            = "Search user or group";
+"RECIPIENTS_LIST_NO_RESULT_AR"              = "لا يوجد متابَعين أو مجموعات";
+"RECIPIENTS_LIST_NO_RESULT_EN"              = "No following users or groups";
+"RECIPIENTS_LIST_HEADER1_AR"                = "متاحة للعامة";
+"RECIPIENTS_LIST_HEADER1_EN"                = "Avaialable for public";
+"RECIPIENTS_LIST_HEADER2_AR"                = "قائمة المجموعات";
+"RECIPIENTS_LIST_HEADER2_EN"                = "Groups List";
+"RECIPIENTS_LIST_HEADER3_AR"                = "قائمة المتابَعين";
+"RECIPIENTS_LIST_HEADER3_EN"                = "Following List";
+
+// Sharing options
+"TWITTER_ALERT_TITLE_AR"                    = "تويتر";
+"TWITTER_ALERT_TITLE_EN"                    = "Twitter";
+"TWITTER_ALERT_MSG_AR"                      = "لا يمكن اتمام عملية المشاركة، يجب أن يحتوي جهازك على حساب تويتر فعال.";
+"TWITTER_ALERT_MSG_EN"                      = "Twitter integration is not available.  A Twitter account must be set up on your device.";
+"TWITTER_ALERT_ACTION_AR"                   = "موافق";
+"TWITTER_ALERT_ACTION_EN"                   = "OK";
+"FACEBOOK_ALERT_TITLE_AR"                   = "فيسبوك";
+"FACEBOOK_ALERT_TITLE_EN"                   = "Facebook";
+"INSTAGRAM_ALERT_TITLE_AR"                  = "انستغرام";
+"INSTAGRAM_ALERT_TITLE_EN"                  = "Instagram";
+"COPYLINK_ALERT_TITLE_AR"                   = "نسخ الرابط";
+"COPYLINK_ALERT_TITLE_EN"                   = "Copy Link";
+"INSTAGRAM_ALERT_TITLE_AR"                  = "انستغرام";
+"INSTAGRAM_ALERT_TITLE_EN"                  = "Instagram";
+"INSTAGRAM_ALERT_MSG_AR"                    = "لا يمكن اتمام عملية المشاركة، يجب أن يحتوي جهازك على تطبيق الانستغرام.";
+"INSTAGRAM_ALERT_MSG_EN"                    = "Instagram application is not available on your device.";
+"INSTAGRAM_ALERT_ERROR_AR"                  = "فشلت عملية المشاركة يرجى إعادة المحاولة";
+"INSTAGRAM_ALERT_ERROR_EN"                  = "Sharing process failed, please try again";
+
+// Chat
+"CHAT_SEND_AR"                              = "ارسال";
+"CHAT_SEND_EN"                              = "Send";
+"CHAT_NEW_MESSAGE_AR"                       = "رسالة جديدة";
+"CHAT_NEW_MESSAGE_EN"                       = "New Message";
+"CHAT_SUBMISSION_FAILED_EN"                 = "Failed To Submit Message, please check your phone settings";
+"CHAT_SUBMISSION_FAILED_AR"                 = "فشلت عملية الارسال، يرجى إعادة المحاولة";
+"CHAT_SUBMISSION_FAILED_TITLE_EN"           = "Message Submission Failed";
+"CHAT_SUBMISSION_FAILED_TITLE_AR"           = "فشل الارسال";
+"CHAT_SUBMISSION_FAILED_MSG_EN"             = "Failed To Submit Message, please check your phone settings";
+"CHAT_SUBMISSION_FAILED_MSG_AR"             = "فشلت عملية الارسال، يرجى إعادة المحاولة";
+"CHAT_SUBMISSION_FAILED_RETRY_EN"           = "Retry";
+"CHAT_SUBMISSION_FAILED_RETRY_AR"           = "إعادة المحاولة";
+"CHAT_SUBMISSION_FAILED_CANCEL_EN"          = "Cancel";
+"CHAT_SUBMISSION_FAILED_CANCEL_AR"          = "إلغاء الامر";
+"CHAT_SUBMISSION_FORBIDDEN_EN"              = "Your are not allowed to send messages to this user";
+"CHAT_SUBMISSION_FORBIDDEN_AR"              = "فشلت عملية الارسال، لا يمكنك ارسال رسائل الى هذا المستخدم";
+"CHAT_GROUP_CREATE_BY_EN"                   = "%@ created this group, %@";
+"CHAT_GROUP_CREATE_BY_AR"                   = "قام %@ بانشاء المجموعة في %@";
+"CHAT_MORE_PICKER_FROM_GALLEREY_AR"         = "فتح معرض الصور";
+"CHAT_MORE_PICKER_FROM_GALLEREY_EN"         = "Attch photo from Gallery";
+"CHAT_MORE_PICKER_LOCATION_AR"              = "ارسال مكان";
+"CHAT_MORE_PICKER_LOCATION_EN"              = "Send Location";
+
+
+// Notifications
+"NAV_NOTIFICATIONS_TITLE_EN"                = "Notifications";
+"NAV_NOTIFICATIONS_TITLE_AR"                = "التنبيهات";
+"NOTIFICATIONS_NO_RESULT_EN"                = "You have no Notifications to Show";
+"NOTIFICATIONS_NO_RESULT_AR"                = "ليس لديك تنبيهات لعرضها";
+
+"NOTIFICATION_NEW_FOLLOWER_EN"              = "You have a new Follower";
+"NOTIFICATION_NEW_FOLLOWER_AR"              = "لديك متابع جديد";
+"NOTIFICATION_NEW_FOLLOWER_DESC_EN"         = "%@ Started Following You";
+"NOTIFICATION_NEW_FOLLOWER_DESC_AR"         = "لقد بدأ %@ بمتابعتك";
+
+"NOTIFICATION_NEW_CHAT_MESSAGE_EN"          = "You have a new Message";
+"NOTIFICATION_NEW_CHAT_MESSAGE_AR"          = "لديك رسالة جديدة";
+"NOTIFICATION_NEW_CHAT_MESSAGE_DESC_EN"     = "%@ sent you a new message";
+"NOTIFICATION_NEW_CHAT_MESSAGE_DESC_AR"     = "أرسل اليك %@ رسالة جديدة";
+
+"NOTIFICATION_NEW_GROUP_MESSAGE_EN"         = "You have a new Message";
+"NOTIFICATION_NEW_GROUP_MESSAGE_AR"         = "لديك رسالة جديدة";
+"NOTIFICATION_NEW_GROUP_MESSAGE_DESC_EN"    = "New group message in %@";
+"NOTIFICATION_NEW_GROUP_MESSAGE_DESC_AR"    = "لديك رسالة جديدة في %@";
+
+"NOTIFICATION_ADDED_TO_GROUP_EN"            = "You have been added to Group";
+"NOTIFICATION_ADDED_TO_GROUP_AR"            = "تمت اضافتك الى مجموعة جديدة";
+"NOTIFICATION_ADDED_TO_GROUP_DESC_EN"       = "%@ Added you to group %@";
+"NOTIFICATION_ADDED_TO_GROUP_DESC_AR"       = "قام %@ باضافتك الى مجموعة %@";
+
+"NOTIFICATION_MENTIONED_EN"                 = "You have been mentioned";
+"NOTIFICATION_MENTIONED_AR"                 = "تم التنويه لك";
+"NOTIFICATION_MENTIONED_DESC_EN"            = "%@ mentioned You on this media";
+"NOTIFICATION_MENTIONED_DESC_AR"            = "قام %@ بالتنويه لك في هذا التسجيل";
+
+"NOTIFICATION_MENTIONED_IN_EVENT_EN"        = "You have been mentioned";
+"NOTIFICATION_MENTIONED_IN_EVENT_AR"        = "تم التنويه لك";
+"NOTIFICATION_MENTIONED_IN_EVENT_DESC_EN"   = "%@ mentioned You at %@";
+"NOTIFICATION_MENTIONED_IN_EVENT_DESC_AR"   = "قام %@ بالتنويه لك في %@";
+
+"CREATE_EVENT_TITLE_EN"                     = "New Event";
+"CREATE_EVENT_TITLE_AR"                     = "انشاء مناسبة";
+"CREATE_EVENT_TITLE_EDIT_EN"                = "Edit Event";
+"CREATE_EVENT_TITLE_EDIT_AR"                = "تعديل مناسبة";
+"CREATE_EVENT_NAME_EN"                      = "Event Title";
+"CREATE_EVENT_NAME_AR"                      = "اسم المناسبة";
+"CREATE_EVENT_LOCATION_EN"                  = "Location";
+"CREATE_EVENT_LOCATION_AR"                  = "المكان";
+"CREATE_EVENT_NAME_PLACEHOLDER_EN"          = "Enter Event Name";
+"CREATE_EVENT_NAME_PLACEHOLDER_AR"          = "أدخل اسم المناسبة";
+"CREATE_EVENT_START_DATE_EN"                = "Start date";
+"CREATE_EVENT_START_DATE_AR"                = "موعد البداية";
+"CREATE_EVENT_END_DATE_EN"                  = "End Date";
+"CREATE_EVENT_END_DATE_AR"                  = "موعد الإنتهاء";
+"CREATE_EVENT_SAVE_EN"                      = "Save Event";
+"CREATE_EVENT_SAVE_AR"                      = "حفظ المناسبة";
+"CREATE_EVENT_ERROR_EMPTY_TITLE_EN"         = "Event Name Can't be empty.";
+"CREATE_EVENT_ERROR_EMPTY_TITLE_AR"         = "الرجاء ملء خانة اسم المناسبة";
+"CREATE_EVENT_ERROR_EMPTY_LOCATION_EN"      = "Event Location Can't be empty.";
+"CREATE_EVENT_ERROR_EMPTY_LOCATION_AR"      = "الرجاء تحديد مكان المناسبة";
+"CREATE_EVENT_SUCCESS_AR"                   = "لقد تمت عملية الحفظ بنجاح";
+"CREATE_EVENT_SUCCESS_EN"                   = "Saved successfully";
+"CREATE_EVENT_FAILED_AR"                    = "فشلت عملية حفظ المناسبة";
+"CREATE_EVENT_FAILED_EN"                    = "Failed to save Event";
+
+"EVENTS_LIST_NO_RESULT_AR"                  = "لا يوجد مناسبات لعرضها";
+"EVENTS_LIST_NO_RESULT_EN"                  = "No Events to display";
+
+"USER_LOCATIONS_LIST_NO_RESULT_EN"          = "No Locations to display";
+"USER_LOCATIONS_LIST_NO_RESULT_AR"          = "لا يوجد مواقع لعرضها";
+
+"LOCATIONS_LIST_GOOGLE_PLACES_FAIED_EN"     = "Failed to retrieve location";
+"LOCATIONS_LIST_GOOGLE_PLACES_FAIED_AR"     = "فشلت عملية استعادة الموقع";
+
+"TIMELINES_COLLECTION_NO_TIMELINES_AR"      = "لا يوجد أحداث لعرضها";
+"TIMELINES_COLLECTION_NO_TIMELINES_EN"      = "No timelines to show";
+"TIMELINES_COLLECTION_MENTION_SUCCESS_AR"   = "تمت الدعوة بنجاح";
+"TIMELINES_COLLECTION_MENTION_SUCCESS_EN"   = "Mentioned Successfully";
+"TIMELINES_COLLECTION_MENTION_FAILED_AR"    = "فشل ارسال الدعوة, تحقق من اتصال";
+"TIMELINES_COLLECTION_MENTION_FAILED_EN"    = "Mention Failed, Check your internet connection";
+
+"USER_RELATED_LOCATIONS_EN"                 = "Checked in Locations";
+"USER_RELATED_LOCATIONS_AR"                 = "المواقع المسجل بها";
+
+"PRIVATE_LOCATION_NAME_PLACESHOLDER_AR"     = "موقع خاص";
+"PRIVATE_LOCATION_NAME_PLACESHOLDER_EN"     = "Private Location";
+
+"DATE_FORMATE_DAY_EN"                       = "d";
+"DATE_FORMATE_DAY_AR"                       = "يوم";
+"DATE_FORMATE_PREFIX_EN"                    = "";
+"DATE_FORMATE_PREFIX_AR"                    = "منذ";
+"DATE_FORMATE_SUFFIX_EN"                    = "";
+"DATE_FORMATE_SUFFIX_AR"                    = "ago";
+"DATE_FORMATE_DAYS_EN"                      = "d";
+"DATE_FORMATE_DAYS_AR"                      = "أيام";
+"DATE_FORMATE_HOURS_EN"                     = "h";
+"DATE_FORMATE_HOURS_AR"                     = "ساعات";
+"DATE_FORMATE_HOUR_EN"                      = "h";
+"DATE_FORMATE_HOUR_AR"                      = "ساعة";
+"DATE_FORMATE_MINUTES_EN"                   = "min";
+"DATE_FORMATE_MINUTES_AR"                   = "دقائق";
+"DATE_FORMATE_MINUTE_EN"                    = "min";
+"DATE_FORMATE_MINUTE_AR"                    = "دقيقة";
+"DATE_FORMATE_SECONDS_EN"                   = "sec";
+"DATE_FORMATE_SECONDS_AR"                   = "ثوان";
+"DATE_FORMATE_SECOND_EN"                    = "sec";
+"DATE_FORMATE_SECOND_AR"                    = "ثانية";
+
+"SIGNIN_BIO_PLACEHOLDER_AR"                 = "أدخل ملخص السيرة الذاتية";
+"SIGNIN_BIO_PLACEHOLDER_EN"                 = "Enter your biography";
+"PROFILE_EDIT_BIO_FIELD_EN"                 = "Bio";
+"PROFILE_EDIT_BIO_FIELD_AR"                 = "ملخص عني";
+

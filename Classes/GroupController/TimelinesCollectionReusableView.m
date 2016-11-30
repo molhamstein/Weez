@@ -1,0 +1,19 @@
+//
+//  TimelinesCollectionHeaderViewCollectionReusableView.m
+//  Weez
+//
+//  Created by Dania on 11/15/16.
+//  Copyright © 2016 AlphaApps. All rights reserved.
+//
+
+#import "TimelinesCollectionReusableView.h"
+#import "AppManager.h"
+
+@implementation TimelinesCollectionReusableView
+@synthesize titleLabel;
+-(void) setTitle:(NSString*)title
+{
+    titleLabel.text = title;
+    titleLabel.font = [[AppManager sharedManager] getFontType:kAppFontCellTitle];
+}
+@end
