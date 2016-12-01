@@ -454,8 +454,11 @@
 "PICK_LOCATION_TAGS_TITLE_EN"               = "Add tags";
 "PICK_LOCATION_WEEZ_LOCATIONS_TITLE_EN"     = "Active locations";
 "PICK_LOCATION_WEEZ_LOCATIONS_TITLE_AR"     = "مواقع نشطة";
-"PICK_LOCATION_OTHER_LOCATIONS_TITLE_EN"     = "Other locations";
-"PICK_LOCATION_OTHER_LOCATIONS_TITLE_AR"     = "مواقع اخرى";
+"PICK_LOCATION_OTHER_LOCATIONS_TITLE_EN"    = "Other locations";
+"PICK_LOCATION_OTHER_LOCATIONS_TITLE_AR"    = "مواقع اخرى";
+"PICK_LOCATION_TITLE_AR"                    = "اختيار الموقع";
+"PICK_LOCATION_TITLE_EN"                    = "Pick Location";
+
 
 // Group Chat
 "GROUP_DETAILS_TITLE_AR"                    = "معلومات المجموعة";

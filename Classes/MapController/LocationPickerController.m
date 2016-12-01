@@ -100,7 +100,7 @@ typedef enum{
     self.navigationItem.rightBarButtonItem = barButton2;
     
     // set text
-    self.navigationItem.title = [[AppManager sharedManager] getLocalizedString:@"NAV_MAP_TITLE"];
+    self.navigationItem.title = [[AppManager sharedManager] getLocalizedString:@"PICK_LOCATION_TITLE"];
     
     _lblTagsTitle.font = [[AppManager sharedManager] getFontType:kAppFontDescription];
     _lblTagsTitle.text = [[AppManager sharedManager] getLocalizedString:@"PICK_LOCATION_TAGS_TITLE"];
@@ -230,6 +230,7 @@ typedef enum{
 - (void)mapView:(GMSMapView *)mapView idleAtCameraPosition:(GMSCameraPosition *)position{
     if(!userMovedMap)
         return;
+    
     [self reloadLocationsData];
 //    self.detailsViewBottomConstraint.constant = - _viewDetailsContainer.frame.size.height;
 //    [self.viewDetailsContainer setNeedsUpdateConstraints];
@@ -287,7 +288,7 @@ typedef enum{
     [self startIndicator];
     loadingInProgress = YES;
     // request data from the api
-    [[ConnectionManager sharedManager] getLocationsAndEventsListSuccess:^(NSMutableArray *locationsList, NSMutableArray *eventsList, NSMutableArray *placesList)
+    [[ConnectionManager sharedManager] getLocationsAndEventsListNearLat:lat andLong:longitude Success:^(NSMutableArray *locationsList, NSMutableArray *eventsList, NSMutableArray *placesList)
      {
          listOfLocationsAndEvents = [[NSMutableArray alloc] init];
          [listOfLocationsAndEvents addObjectsFromArray:locationsList];

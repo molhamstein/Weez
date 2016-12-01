@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Constants.h"
+#import <CoreLocation/CLLocation.h>
 
 @interface Location : NSObject <NSCoding>
 {
@@ -53,6 +54,8 @@
 @property (nonatomic, retain) NSMutableArray *timelines;
 @property (nonatomic, retain) NSMutableArray *events;
 @property (nonatomic) LocationStatus status;
+
+- (instancetype) initUndefinedWithCoords:(CLLocationCoordinate2D) coords;
 
 /*! used by the clint side to flag the places defined by only coordinnates and does not have a name
 this flag is local and does not have an equavelent on the API */

@@ -1910,7 +1910,7 @@ ConnectionManager* m_pgAsyncDataManager = nil;
     }];
 }
 
-- (void)getLocationsAndEventsListSuccess:(void (^)(NSMutableArray *locationsList, NSMutableArray *eventsList, NSMutableArray *placesList))getLocationsListSuccess failure:(void (^)(NSError *error))getLocationsListFailure
+- (void)getLocationsAndEventsListNearLat:(float)lat andLong:(float)lng Success:(void (^)(NSMutableArray *locationsList, NSMutableArray *eventsList, NSMutableArray *placesList))getLocationsListSuccess failure:(void (^)(NSError *error))getLocationsListFailure
 {
     // user logged out
     if (! [[ConnectionManager sharedManager] isUserLoggedIn])
@@ -1920,7 +1920,7 @@ ConnectionManager* m_pgAsyncDataManager = nil;
     // init the asynchronase request manager
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
-    NSString *apiLink = [NSString stringWithFormat:@"%@locations?access_token=%@&lat=%f&long=%f", WEEZ_API_DOMAIN, userObject.sessionToken, [AppManager sharedManager].currenttUserLocation.coordinate.latitude, [AppManager sharedManager].currenttUserLocation.coordinate.longitude];
+    NSString *apiLink = [NSString stringWithFormat:@"%@locations?access_token=%@&lat=%f&long=%f", WEEZ_API_DOMAIN, userObject.sessionToken, lat, lng];
     // post the request to server login
     [manager GET:apiLink parameters:neededDic progress:nil success:^(NSURLSessionTask *task, id responseObject)
      {
@@ -2714,7 +2714,7 @@ ConnectionManager* m_pgAsyncDataManager = nil;
 @param coordinates: coordinates used to create a location message this type of message contains only coordinates that can be showed on map
 @param locationId: optional id of location to attach with the media message currently used only with photo and video messages
 @param locationId: when not nil we will create a private location on the api before submitting the message and use the id of the newly created location as locationId */
-- (void)sendChatMessage:(NSString *) messsage ToGroup:(Group*)group mediaType:(MediaType) mediaType media:(id) media withFileURL:(NSURL *)fileURL orLocationMessageAt:(CLLocationCoordinate2D) coordinates withLocationId:(NSString*)locationId orCustomLocation:(Location*)customLocation asReplyToMessage:(NSString*)originalMsgId inOriginalGroup:(NSString*)originalGrroupId sharedTimelineId:(NSString*)sharedTimelineId sharedLocationId:(NSString*)sharedLocationId sharedEventId:(NSString*)sharedEventId success:(void (^)())onSuccess failure:(void (^)(NSError *error, NSString *errorMsg))onFailure
+- (void)sendChatMessage:(NSString *) messsage ToGroup:(Group*)group mediaType:(MediaType) mediaType media:(id) media withFileURL:(NSURL *)fileURL orLocationMessageAt:(Location*) coordinates withLocationId:(NSString*)locationId orCustomLocation:(Location*)customLocation asReplyToMessage:(NSString*)originalMsgId inOriginalGroup:(NSString*)originalGrroupId sharedTimelineId:(NSString*)sharedTimelineId sharedLocationId:(NSString*)sharedLocationId sharedEventId:(NSString*)sharedEventId success:(void (^)())onSuccess failure:(void (^)(NSError *error, NSString *errorMsg))onFailure
 {
     // user logged out
     if (! [[ConnectionManager sharedManager] isUserLoggedIn])
@@ -2730,9 +2730,15 @@ ConnectionManager* m_pgAsyncDataManager = nil;
         [neededDataDic setObject:originalGrroupId forKey:@"parentGroupId"];
     }
     
-    if(CLLocationCoordinate2DIsValid(coordinates)){
-        [neededDataDic setObject:[NSNumber numberWithFloat:coordinates.latitude] forKey:@"lat"];
-        [neededDataDic setObject:[NSNumber numberWithFloat:coordinates.longitude] forKey:@"long"];
+    // submitting coordinates message
+    if(coordinates){
+        // location is from weez locations "not google place or random coordinates"
+        if(coordinates.objectId && !coordinates.isUnDefinedPlace){
+            [neededDataDic setObject:coordinates.objectId forKey:@"locationId"];
+        }else{ // google places location or coordinates based location
+            [neededDataDic setObject:[NSNumber numberWithFloat:coordinates.latitude] forKey:@"lat"];
+            [neededDataDic setObject:[NSNumber numberWithFloat:coordinates.longitude] forKey:@"long"];
+        }
     }
     
     if(locationId){

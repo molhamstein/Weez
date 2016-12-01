@@ -61,7 +61,7 @@
     NSURL *inSubmissionAudioURL;
     UIImage *inSubmissionImage;
     NSString *inSubmissionText;
-    CLLocationCoordinate2D inSubmissionCoord;
+    Location *inSubmissionCoord;
     
     //preview media
     NSURL *selectedVideoUrlForPreview;

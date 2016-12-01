@@ -100,7 +100,7 @@
 - (void)leaveGroup:(NSString*)groupId success:(void (^)())leaveGroupSuccess failure:(void (^)(NSError *error))leaveGroupFailure;
 - (void)getGroup:(Group*)group success:(void (^)(Group *group))onSuccess failure:(void (^)(NSError *error))onFailure;
 - (void)getChat:(NSString*)userId success:(void (^)(Group *group))onSuccess failure:(void (^)(NSError *error))onFailure;
-- (void)sendChatMessage:(NSString *) messsage ToGroup:(Group*)group mediaType:(MediaType) mediaType media:(id) media withFileURL:(NSURL *)fileURL orLocationMessageAt:(CLLocationCoordinate2D) coordinates withLocationId:(NSString*)locationId orCustomLocation:(Location*)customLocation asReplyToMessage:(NSString*)originalMsgId inOriginalGroup:(NSString*)originalGrroupId sharedTimelineId:(NSString*)sharedTimelineId sharedLocationId:(NSString*)sharedLocationId sharedEventId:(NSString*)sharedEventId success:(void (^)())onSuccess failure:(void (^)(NSError *error, NSString *errorMsg))onFailure;
+- (void)sendChatMessage:(NSString *) messsage ToGroup:(Group*)group mediaType:(MediaType) mediaType media:(id) media withFileURL:(NSURL *)fileURL orLocationMessageAt:(Location*) coordinates withLocationId:(NSString*)locationId orCustomLocation:(Location*)customLocation asReplyToMessage:(NSString*)originalMsgId inOriginalGroup:(NSString*)originalGrroupId sharedTimelineId:(NSString*)sharedTimelineId sharedLocationId:(NSString*)sharedLocationId sharedEventId:(NSString*)sharedEventId success:(void (^)())onSuccess failure:(void (^)(NSError *error, NSString *errorMsg))onFailure;
 // Devices
 - (void)registerDeviceForNotification:(NSString*)deviceID success:(void (^)())registerDeviceSuccess failure:(void (^)(NSError *error))registerDeviceFailure;
 // Sign up register user
@@ -108,7 +108,7 @@
 - (void)signinLogin:(NSString*)email andPassword:(NSString*)password success:(void (^)())signupLoginSuccess failure:(void (^)(NSError *error, NSString* errorMsg))signupLoginFailure;
 - (void)resetPassword:(NSString*)userEmail withNumber:(NSString*)userNumber success:(void (^)())resetPasswordSuccess failure:(void (^)(NSError *error, int errorCode))resetPasswordFailure;
 - (void)changePassword:(NSString*)oldPassword withNewPass:(NSString*)newPassword success:(void (^)())changePasswordSuccess failure:(void (^)(NSError *error, int errorCode))changePasswordFailure;
-- (void)getLocationsAndEventsListSuccess:(void (^)(NSMutableArray *locationsList, NSMutableArray *eventsList, NSMutableArray *placesList))getLocationsListSuccess failure:(void (^)(NSError *error))getLocationsListFailure;
+- (void)getLocationsAndEventsListNearLat:(float)lat andLong:(float)lng Success:(void (^)(NSMutableArray *locationsList, NSMutableArray *eventsList, NSMutableArray *placesList))getLocationsListSuccess failure:(void (^)(NSError *error))getLocationsListFailure;
 // Video
 - (void)downloadVideoFromURL:(NSString*)videoLink progress:(void (^)(CGFloat progress))downloadVideoFromURLProgress success:(void (^)(NSURL *filePath))downloadVideoFromURLSuccess failure:(void (^)(NSError *error))downloadVideoFromURLFailure;
 

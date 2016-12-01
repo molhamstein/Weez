@@ -34,6 +34,19 @@
 @synthesize isPrivateLocation;
 @synthesize totalMediaDuration;
 
+
+- (instancetype) initUndefinedWithCoords:(CLLocationCoordinate2D) coords{
+    self = [super init];
+    if(!self)
+        return nil;
+    self.objectId = nil;
+    self.latitude = coords.latitude;
+    self.longitude = coords.longitude;
+    self.isUnDefinedPlace = YES;
+    
+    return self;
+}
+
 #pragma mark -
 #pragma mark Location Object
 // Init with Location decoder
@@ -112,7 +125,7 @@
     status = [[jsonObject objectForKey:@"status"] intValue];
     isPrivateLocation = [[jsonObject objectForKey:@"private"] intValue];
     totalMediaDuration = [[jsonObject objectForKey:@"totalMediaDuration"] floatValue];
-    timelines  = [[NSMutableArray alloc] init];
+    timelines = [[NSMutableArray alloc] init];
     //users
     if([jsonObject objectForKey:@"users"] != nil && [[jsonObject objectForKey:@"users"] isKindOfClass:[NSArray class]])
     {
