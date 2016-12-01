@@ -1285,7 +1285,8 @@
     [self hideAllViews];
     switch (deepLinkNotification.type) {
         case kAppNotificationTypeSomeoneStartedFollowingYou:
-            //[self performSegueWithIdentifier:@"notificationsListProfileSegue" sender:self];
+        case kAppNotificationTypeSomeoneWantToFollowYou:
+        case kAppNotificationTypeSomeoneAcceptYourFollowRequest:
             [self performSegueWithIdentifier:@"homeProfileSegue" sender:deepLinkNotification];
             break;
         case kAppNotificationTypeNewMessageInGroup:

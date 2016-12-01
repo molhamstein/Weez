@@ -593,6 +593,16 @@
 "NOTIFICATION_NEW_FOLLOWER_DESC_EN"         = "%@ Started Following You";
 "NOTIFICATION_NEW_FOLLOWER_DESC_AR"         = "لقد بدأ %@ بمتابعتك";
 
+"NOTIFICATION_ACCEPT_FOLLOWING_EN"          = "You are now Follower";
+"NOTIFICATION_ACCEPT_FOLLOWING_AR"          = "أصبحت متابع";
+"NOTIFICATION_ACCEPT_FOLLOWING_DESC_EN"     = "%@ Accept your follow request";
+"NOTIFICATION_ACCEPT_FOLLOWING_DESC_AR"     = " قبل %@ طلب المتابعة";
+
+"NOTIFICATION_NEW_FOLLOWING_REQUEST_EN"     = "You have a new Following request ";
+"NOTIFICATION_NEW_FOLLOWING_REQUEST_AR"     = "لديك طلب متابعة جديد";
+"NOTIFICATION_NEW_FOLLOWING_REQUEST_DESC_EN"= "%@ Wants to Follow You";
+"NOTIFICATION_NEW_FOLLOWING_REQUEST_DESC_AR"= " يرغب %@ بمتابعتك";
+
 "NOTIFICATION_NEW_CHAT_MESSAGE_EN"          = "You have a new Message";
 "NOTIFICATION_NEW_CHAT_MESSAGE_AR"          = "لديك رسالة جديدة";
 "NOTIFICATION_NEW_CHAT_MESSAGE_DESC_EN"     = "%@ sent you a new message";

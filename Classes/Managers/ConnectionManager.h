@@ -72,6 +72,8 @@
 // Friends
 - (void)searchForUser:(NSString*)username success:(void (^)(NSMutableArray *usersList))searchForUserSuccess failure:(void (^)(NSError *error))searchForUserFailure;
 - (void)followUser:(NSString*)userId success:(void (^)())followUserSuccess failure:(void (^)(NSError *error))followUserFailure;
+- (void)acceptFollowRequest:(NSString*)userId success:(void (^)())acceptSuccess failure:(void (^)(NSError *error))acceptFailure;
+- (void)rejectFollowRequest:(NSString*)userId success:(void (^)())rejectSuccess failure:(void (^)(NSError *error))rejectFailure;
 - (void)getFollowingList:(FollowType)followType rankedBy:(TimelineType)rankBy success:(void (^)(NSMutableArray *usersList))getFollowingListSuccess failure:(void (^)(NSError *error))getFollowingListFailure;
 - (void)getMentionList:(void (^)(NSMutableArray *mentionList))getMentionListSuccess failure:(void (^)(NSError *error))getMentionListFailure;
 - (void)getRecipientsListRankedBy:(NSString*)rankBy onSuccess:(void (^)(NSMutableArray *usersList, NSMutableArray *groupsList))getRecipientsListSuccess failure:(void (^)(NSError *error))getRecipientsListFailure;

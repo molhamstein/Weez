@@ -281,6 +281,23 @@
         [self requestfollowFriend:friendId];
 }
 
+- (void)acceptFriend:(NSString*)friendId
+{
+    // unfollow case
+    if ([recievedFollowingRequestsList containsObject:friendId])
+    {
+        [recievedFollowingRequestsList removeObject:friendId];
+        [followersList addObject:friendId];
+    }
+}
+
+- (void)rejectFriend:(NSString*)friendId
+{
+    if ([recievedFollowingRequestsList containsObject:friendId])
+    {
+        [recievedFollowingRequestsList removeObject:friendId];
+    }
+}
 // Follow/Unfollow location
 - (void)followLocation:(NSString*)locationId
 {

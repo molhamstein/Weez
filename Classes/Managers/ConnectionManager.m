@@ -445,7 +445,15 @@ ConnectionManager* m_pgAsyncDataManager = nil;
              {
                  id inbox = [responseObject objectForKey:@"inbox"];
                  NSMutableArray *arrayNotifications = [[NSMutableArray alloc] init];
-                 NSMutableArray *resultList = (NSMutableArray*)[inbox objectForKey:@"notifications"];//followRequests
+                 NSMutableArray *resultList = (NSMutableArray*)[inbox objectForKey:@"notifications"];
+                 NSMutableArray *requestsList = (NSMutableArray*)[inbox objectForKey:@"followRequests"];
+               
+                 for (NSMutableDictionary *request in requestsList)
+                 {
+                     AppNotification *obj = [[AppNotification alloc] init];
+                     [obj fillWithJSON:request];
+                     [arrayNotifications addObject:obj];
+                 }
                  // loop all sections
                  for (NSMutableDictionary *resultObj in resultList)
                  {
@@ -1430,6 +1438,87 @@ ConnectionManager* m_pgAsyncDataManager = nil;
     }];
 }
 
+- (void)acceptFollowRequest:(NSString*)userId success:(void (^)())acceptSuccess failure:(void (^)(NSError *error))acceptFailure
+{
+    // user logged out
+    if (! [[ConnectionManager sharedManager] isUserLoggedIn])
+        return;
+    // needed dictionary
+    NSDictionary* neededDic = @{@"userId":userId};
+    // init the asynchronase request manager
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
+    NSString *apiLink = [NSString stringWithFormat:@"%@users/pending/accept?access_token=%@", WEEZ_API_DOMAIN, userObject.sessionToken];
+    // post the request to server login
+    [manager POST:apiLink parameters:neededDic progress:nil success:^(NSURLSessionTask *task, id responseObject)
+     {
+         // no return object request timeout
+         if (responseObject == nil)
+             acceptFailure(nil);
+         // check error code
+         else if ([responseObject objectForKey:@"error"] != nil)
+         {
+             // return error code
+             acceptFailure(nil);
+         }
+         else// success
+         {
+             // refresh current user
+             [[ConnectionManager sharedManager] getCurrentUser:^
+              {
+              }
+                                                       failure:^(NSError *error)
+              {
+              }];
+             acceptSuccess();
+         }
+     }
+          failure:^(NSURLSessionTask *operation, NSError *error)
+     {
+         acceptFailure(error);
+     }];
+}
+
+- (void)rejectFollowRequest:(NSString*)userId success:(void (^)())rejectSuccess failure:(void (^)(NSError *error))rejectFailure
+{
+    // user logged out
+    if (! [[ConnectionManager sharedManager] isUserLoggedIn])
+        return;
+    // needed dictionary
+    NSDictionary* neededDic = @{@"userId":userId};
+    // init the asynchronase request manager
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
+    NSString *apiLink = [NSString stringWithFormat:@"%@users/pending/reject?access_token=%@", WEEZ_API_DOMAIN, userObject.sessionToken];
+    // post the request to server login
+    [manager POST:apiLink parameters:neededDic progress:nil success:^(NSURLSessionTask *task, id responseObject)
+     {
+         // no return object request timeout
+         if (responseObject == nil)
+             rejectFailure(nil);
+         // check error code
+         else if ([responseObject objectForKey:@"error"] != nil)
+         {
+             // return error code
+             rejectFailure(nil);
+         }
+         else// success
+         {
+             // refresh current user
+             [[ConnectionManager sharedManager] getCurrentUser:^
+              {
+              }
+                                                       failure:^(NSError *error)
+              {
+              }];
+             rejectSuccess();
+         }
+     }
+          failure:^(NSURLSessionTask *operation, NSError *error)
+     {
+         rejectFailure(error);
+     }];
+}
 
 // report user
 - (void)reportUser:(NSString*)userId reportType:(int)reportType success:(void (^)())onSuccess failure:(void (^)(NSError *error))onFailure

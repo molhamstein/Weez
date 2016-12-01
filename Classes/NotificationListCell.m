@@ -31,11 +31,6 @@
     
     // compose notificaton message according to notification type
     switch (object.type) {
-        case kAppNotificationTypeSomeoneStartedFollowingYou:
-            title = [[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_NEW_FOLLOWER"];
-            desc = [NSString stringWithFormat:[[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_NEW_FOLLOWER_DESC"], object.actor.username];
-            imgUrl = object.actor.profilePic;
-            break;
         case kAppNotificationTypeNewMessageInChat:
             title = [[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_NEW_CHAT_MESSAGE"];
             desc = [NSString stringWithFormat:[[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_NEW_CHAT_MESSAGE_DESC"], object.actor.username];
@@ -46,20 +41,12 @@
             desc = [NSString stringWithFormat:[[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_NEW_GROUP_MESSAGE_DESC"], object.group.name];
             imgUrl = object.group.image;
             break;
-        case kAppNotificationTypeSomeoneAddedYouToGroup:
-            title = [[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_ADDED_TO_GROUP"];
-            desc = [NSString stringWithFormat:[[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_ADDED_TO_GROUP_DESC"], object.actor.username, object.group.name];
-            imgUrl = object.group.image;
-            break;
-        case kAppNotificationTypeSomeoneMentionedYou:
-            title = [[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_MENTIONED"];
-            desc = [NSString stringWithFormat:[[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_MENTIONED_DESC"], object.actor.username];
-            imgUrl = object.actor.profilePic;
-            break;
         case kAppNotificationTypeSomeoneMentionedYouInEvent:
             title = [[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_MENTIONED_IN_EVENT"];
             desc = [NSString stringWithFormat:[[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_MENTIONED_IN_EVENT_DESC"], object.actor.username, object.event.name];
             imgUrl = object.event.image;
+            break;
+        default:
             break;
     }
     

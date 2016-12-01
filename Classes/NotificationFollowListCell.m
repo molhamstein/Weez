@@ -19,6 +19,9 @@
 @synthesize descLabel;
 @synthesize dateLabel;
 @synthesize followButton;
+@synthesize rejectButton;
+@synthesize acceptButton;
+@synthesize requestActionsContainer;
 
 #pragma mark -
 #pragma mark Cell main functions
@@ -30,11 +33,52 @@
     NSString *title;
     NSString *imgUrl;
     NSString *desc;
-    
-    title = [[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_NEW_FOLLOWER"];
-    desc = [NSString stringWithFormat:[[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_NEW_FOLLOWER_DESC"], object.actor.username];
+    switch (object.type) {
+        case kAppNotificationTypeSomeoneStartedFollowingYou:
+        {
+            title = [[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_NEW_FOLLOWER"];
+            desc = [NSString stringWithFormat:[[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_NEW_FOLLOWER_DESC"], object.actor.username];
+            [requestActionsContainer setHidden:YES];
+            [followButton setHidden:NO];
+            
+        }
+            break;
+        case kAppNotificationTypeSomeoneWantToFollowYou:
+        {
+            
+            title = [[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_NEW_FOLLOWING_REQUEST"];
+            desc = [NSString stringWithFormat:[[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_NEW_FOLLOWING_REQUEST_DESC"], object.actor.username];
+            [requestActionsContainer setHidden:NO];
+            [followButton setHidden:YES];
+            
+            Friend *friendObject = [[Friend alloc] init];
+            friendObject.objectId = object.actor.objectId;
+            FOLLOWER_STATE state = [friendObject getFollowerState];
+            if(state == PENDING)
+            {
+                [requestActionsContainer setHidden:NO];
+                [followButton setHidden:YES];
+            }
+            else //I've accepted this request then show follow button
+            {
+                [requestActionsContainer setHidden:YES];
+                [followButton setHidden:NO];
+            }
+        }
+            break;
+        case kAppNotificationTypeSomeoneAcceptYourFollowRequest:
+        {
+            
+            title = [[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_ACCEPT_FOLLOWING"];
+            desc = [NSString stringWithFormat:[[AppManager sharedManager] getLocalizedString:@"NOTIFICATION_ACCEPT_FOLLOWING_DESC"], object.actor.username];
+            [requestActionsContainer setHidden:YES];
+            [followButton setHidden:YES];
+        }
+            break;
+        default:
+            break;
+    }
     imgUrl = object.actor.profilePic;
-    
     // display name and username
     titleLabel.font = [[AppManager sharedManager] getFontType:kAppFontCellTitle];
     titleLabel.text = title;
@@ -89,8 +133,6 @@
     [followButton setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
     [followButton setImage:[UIImage imageNamed:icon] forState:UIControlStateDisabled];
     [followButton setTitle:@"" forState:UIControlStateNormal];
-    // this is my profile
-    [followButton setHidden:NO];
     if ([object.actor.objectId isEqualToString:[[ConnectionManager sharedManager] userObject].objectId])
         [followButton setHidden:YES];
     

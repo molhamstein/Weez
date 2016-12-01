@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="IWT-BT-Q7p">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="IWT-BT-Q7p">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -10895,13 +10895,37 @@ Follow to see their photos and videos.</string>
                                                     </constraints>
                                                     <state key="normal" image="friendFollowIcon"/>
                                                 </button>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELy-E7-tL1">
+                                                    <rect key="frame" x="537" y="15" width="53" height="44"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bEV-yQ-wML" userLabel="Accept">
+                                                            <rect key="frame" x="29" y="10" width="24" height="24"/>
+                                                            <state key="normal" image="friendFollowIconAccept"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWm-4u-cPT" userLabel="Reject">
+                                                            <rect key="frame" x="0.0" y="10" width="24" height="24"/>
+                                                            <state key="normal" image="friendFollowIconReject"/>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="7qQ-ri-WDl"/>
+                                                        <constraint firstItem="bEV-yQ-wML" firstAttribute="centerY" secondItem="ELy-E7-tL1" secondAttribute="centerY" id="I6f-iO-79j"/>
+                                                        <constraint firstItem="xWm-4u-cPT" firstAttribute="centerY" secondItem="ELy-E7-tL1" secondAttribute="centerY" id="O9D-56-hkn"/>
+                                                        <constraint firstAttribute="trailing" secondItem="bEV-yQ-wML" secondAttribute="trailing" id="dkM-t9-4MT"/>
+                                                        <constraint firstItem="xWm-4u-cPT" firstAttribute="leading" secondItem="ELy-E7-tL1" secondAttribute="leading" id="dra-pe-8gR"/>
+                                                        <constraint firstAttribute="width" constant="53" id="fc2-6C-HJ4"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="cPe-7k-HLq" firstAttribute="top" secondItem="LE8-uP-eiQ" secondAttribute="bottom" constant="1" id="8ic-hP-qkh"/>
                                                 <constraint firstAttribute="trailing" secondItem="dKA-G4-uzV" secondAttribute="trailing" constant="10" id="FFS-Q8-nqd"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="LE8-uP-eiQ" secondAttribute="trailing" constant="20" id="KKw-y6-bgO"/>
                                                 <constraint firstAttribute="trailing" secondItem="1gl-xz-jgt" secondAttribute="trailing" constant="10" id="KyF-1D-dkI"/>
+                                                <constraint firstItem="ELy-E7-tL1" firstAttribute="centerY" secondItem="nhJ-vL-EZf" secondAttribute="centerY" id="LVP-R4-70a"/>
                                                 <constraint firstItem="2bs-et-7Zk" firstAttribute="centerY" secondItem="nhJ-vL-EZf" secondAttribute="centerY" id="PrQ-PC-kx3"/>
+                                                <constraint firstAttribute="trailing" secondItem="ELy-E7-tL1" secondAttribute="trailing" constant="10" id="XbU-Ob-hSJ"/>
                                                 <constraint firstItem="1gl-xz-jgt" firstAttribute="leading" secondItem="cPe-7k-HLq" secondAttribute="leading" id="aNt-5M-2Nu"/>
                                                 <constraint firstAttribute="bottom" secondItem="dKA-G4-uzV" secondAttribute="bottom" constant="10" id="ee8-pO-Jmy"/>
                                                 <constraint firstItem="LE8-uP-eiQ" firstAttribute="leading" secondItem="2bs-et-7Zk" secondAttribute="trailing" constant="8" id="hRX-1Y-YHH"/>
@@ -10922,10 +10946,13 @@ Follow to see their photos and videos.</string>
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="acceptButton" destination="bEV-yQ-wML" id="iIJ-LB-RXi"/>
                                             <outlet property="dateLabel" destination="1gl-xz-jgt" id="YsI-Cy-MvX"/>
                                             <outlet property="descLabel" destination="cPe-7k-HLq" id="gxz-G2-peX"/>
                                             <outlet property="followButton" destination="dKA-G4-uzV" id="2y3-we-3Fd"/>
                                             <outlet property="imageView" destination="2bs-et-7Zk" id="YlM-nH-B9H"/>
+                                            <outlet property="rejectButton" destination="xWm-4u-cPT" id="sbb-7z-g1b"/>
+                                            <outlet property="requestActionsContainer" destination="ELy-E7-tL1" id="0dn-0i-aoc"/>
                                             <outlet property="titleLabel" destination="LE8-uP-eiQ" id="re2-H8-7zT"/>
                                         </connections>
                                     </tableViewCell>
@@ -11770,10 +11797,10 @@ Follow to see their photos and videos.</string>
                         <viewControllerLayoutGuide type="bottom" id="V8a-Zt-PJM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2ga-Lg-uXV">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bHo-vK-NM9" customClass="GMSMapView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHo-vK-NM9" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -11826,10 +11853,10 @@ Follow to see their photos and videos.</string>
                         <viewControllerLayoutGuide type="bottom" id="jHi-87-7hM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="j4h-ua-anG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ngk-Rh-Qv4">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ngk-Rh-Qv4">
                                 <rect key="frame" x="20" y="193" width="560" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLogo" translatesAutoresizingMaskIntoConstraints="NO" id="t82-mF-M1B">
@@ -11859,7 +11886,7 @@ Follow to see their photos and videos.</string>
                                     <constraint firstItem="t82-mF-M1B" firstAttribute="top" secondItem="ngk-Rh-Qv4" secondAttribute="top" id="t3c-ff-tb5"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="54" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mFO-er-KyZ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="54" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mFO-er-KyZ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -11947,7 +11974,7 @@ Follow to see their photos and videos.</string>
                                     <outlet property="delegate" destination="bxo-Ac-5js" id="9sz-8f-JyI"/>
                                 </connections>
                             </tableView>
-                            <view alpha="0.5" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lbq-ej-K5a">
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lbq-ej-K5a">
                                 <rect key="frame" x="275" y="183" width="50" height="50"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="W3v-52-VR6">
@@ -12032,7 +12059,7 @@ Follow to see their photos and videos.</string>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="profileMediaCollectionCell" id="q1w-Y0-BIZ" customClass="MediaCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="93" height="86"/>
+                                        <rect key="frame" x="0.0" y="64" width="93" height="86"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="93" height="86"/>
@@ -12107,7 +12134,7 @@ Follow to see their photos and videos.</string>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="profileLocationCollectionCell" id="BID-yA-PWN" customClass="LocationCollectionViewCell">
-                                        <rect key="frame" x="101.5" y="0.0" width="93" height="86"/>
+                                        <rect key="frame" x="101.5" y="64" width="93" height="86"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="93" height="86"/>
@@ -12272,10 +12299,10 @@ Follow to see their photos and videos.</string>
                         <viewControllerLayoutGuide type="bottom" id="fb0-QB-RJ6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Qm4-PR-H0y">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5nl-3k-tUI" userLabel="Header">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5nl-3k-tUI" userLabel="Header">
                                 <rect key="frame" x="0.0" y="20" width="600" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0K-Rh-6Ci">
@@ -12387,12 +12414,12 @@ Follow to see their photos and videos.</string>
                                     <constraint firstItem="A0K-Rh-6Ci" firstAttribute="top" secondItem="5nl-3k-tUI" secondAttribute="top" id="soU-vG-1dM"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B74-Ib-NPC" customClass="GMSMapView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B74-Ib-NPC" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="80" width="600" height="520"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2r5-dY-qKH" userLabel="Details View">
-                                <rect key="frame" x="0.0" y="380" width="600" height="220"/>
+                                <rect key="frame" x="0.0" y="316" width="600" height="220"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="54" sectionHeaderHeight="20" sectionFooterHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="MyH-Jx-o1J">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
@@ -12540,7 +12567,7 @@ Follow to see their photos and videos.</string>
                                 </constraints>
                             </view>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MaM-xd-LUC">
-                                <rect key="frame" x="275" y="275" width="50" height="50"/>
+                                <rect key="frame" x="275" y="243" width="50" height="50"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="X6y-Uj-abL">
                                         <rect key="frame" x="15" y="15" width="20" height="20"/>
@@ -13149,6 +13176,8 @@ Follow to see their photos and videos.</string>
         <image name="chatBtn" width="27" height="27"/>
         <image name="chatCanselComposeText" width="16" height="16"/>
         <image name="friendFollowIcon" width="24" height="24"/>
+        <image name="friendFollowIconAccept" width="24" height="24"/>
+        <image name="friendFollowIconReject" width="24" height="24"/>
         <image name="friendMentionIconActive" width="24" height="24"/>
         <image name="friendSearchIcon" width="21" height="21"/>
         <image name="groupAdminIcon" width="25" height="25"/>
@@ -13205,19 +13234,19 @@ Follow to see their photos and videos.</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TFT-ay-TGw"/>
-        <segue reference="XH5-PZ-HM7"/>
-        <segue reference="SuD-fF-TRY"/>
-        <segue reference="346-v3-gOv"/>
-        <segue reference="36Y-dc-xsj"/>
-        <segue reference="WwD-qs-IDR"/>
-        <segue reference="KIo-lN-qpe"/>
-        <segue reference="aU4-98-cGt"/>
-        <segue reference="zmf-43-j8N"/>
-        <segue reference="btj-0c-ZVT"/>
+        <segue reference="aB5-WS-hT3"/>
+        <segue reference="Dfu-UV-dvf"/>
+        <segue reference="7t8-Jf-bHw"/>
+        <segue reference="4PW-sS-tK1"/>
         <segue reference="gKL-VC-DjA"/>
         <segue reference="hK2-3T-ZSm"/>
-        <segue reference="7Dw-s4-lYQ"/>
+        <segue reference="KIo-lN-qpe"/>
+        <segue reference="aU4-98-cGt"/>
+        <segue reference="36Y-dc-xsj"/>
+        <segue reference="zmf-43-j8N"/>
+        <segue reference="btj-0c-ZVT"/>
         <segue reference="4pb-P6-3iY"/>
+        <segue reference="7Dw-s4-lYQ"/>
         <segue reference="LYe-tv-wk1"/>
     </inferredMetricsTieBreakers>
 </document>

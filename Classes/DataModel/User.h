@@ -77,6 +77,8 @@
 - (NSString*)getProfilePicLink;
 - (void)followFriend:(NSString*)friendId;
 - (void)followFriend:(NSString*)friendId withPrivateProfile:(BOOL)hasPrivateProfile;
+- (void)rejectFriend:(NSString*)friendId;
+- (void)acceptFriend:(NSString*)friendId;
 - (void)followLocation:(NSString*)locationId;
 - (BOOL)isFollowingLocation:(NSString *)locationId;
 - (void)followEvent:(NSString*)eventId;

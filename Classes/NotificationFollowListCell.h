@@ -15,6 +15,9 @@
     UILabel *descLabel;
     UILabel *dateLabel;
     UIButton *followButton;
+    UIButton *acceptButton;
+    UIButton *rejectButton;
+    UIView *requestActionsContainer;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView *imageView;
@@ -22,6 +25,9 @@
 @property(nonatomic, retain) IBOutlet UILabel *descLabel;
 @property(nonatomic, retain) IBOutlet UILabel *dateLabel;
 @property(nonatomic, retain) IBOutlet UIButton *followButton;
+@property(nonatomic, retain) IBOutlet UIButton *acceptButton;
+@property(nonatomic, retain) IBOutlet UIButton *rejectButton;
+@property(nonatomic, retain) IBOutlet UIView *requestActionsContainer;
 
 - (void)populateCellWithContent:(AppNotification*)object;
 

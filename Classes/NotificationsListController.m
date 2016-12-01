@@ -177,12 +177,18 @@
     AppNotification *notificationObj = [listOfNotifications objectAtIndex:indexPath.row];
     switch (notificationObj.type) {
         case kAppNotificationTypeSomeoneStartedFollowingYou:
+        case kAppNotificationTypeSomeoneWantToFollowYou:
+        case kAppNotificationTypeSomeoneAcceptYourFollowRequest:
         {
             NotificationFollowListCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier2 forIndexPath:indexPath];
             [cell populateCellWithContent:notificationObj];
             // follow button
             cell.followButton.tag = indexPath.row;
+            cell.acceptButton.tag = indexPath.row;
+            cell.rejectButton.tag = indexPath.row;
             [cell.followButton addTarget:self action:@selector(followUser:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.acceptButton addTarget:self action:@selector(acceptFollowRequest:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.rejectButton addTarget:self action:@selector(rejectFollowRequest:) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
         case kAppNotificationTypeSomeoneMentionedYou:
@@ -199,7 +205,7 @@
     NotificationListCell *notificationCell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier1 forIndexPath:indexPath];
     [notificationCell populateCellWithContent:notificationObj];
     
-        
+    
     return notificationCell;
 }
 
@@ -217,6 +223,8 @@
 {
     switch (selectedNotificationObject.type) {
         case kAppNotificationTypeSomeoneStartedFollowingYou:
+        case kAppNotificationTypeSomeoneWantToFollowYou:
+        case kAppNotificationTypeSomeoneAcceptYourFollowRequest:
             [self performSegueWithIdentifier:@"notificationsListProfileSegue" sender:self];
             break;
         case kAppNotificationTypeNewMessageInGroup:
@@ -287,7 +295,9 @@
     Friend *friendObject = [[Friend alloc] init];
     friendObject.objectId = notificationObj.actor.objectId;
     
-    [[ConnectionManager sharedManager].userObject followFriend:friendObject.objectId withPrivateProfile:friendObject.isPrivate];
+    
+    
+    [[ConnectionManager sharedManager].userObject followFriend:friendObject.objectId withPrivateProfile:notificationObj.actor.isPrivate];
     // animate the pressed voted image
     sender.alpha = 1.0;
     [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^
@@ -317,7 +327,7 @@
          [sender setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
          [sender setImage:[UIImage imageNamed:icon] forState:UIControlStateDisabled];
          [sender setTitle:@"" forState:UIControlStateNormal];
-
+         
          
          [UIView animateWithDuration:0.1 delay:0.0 options: UIViewAnimationOptionTransitionCrossDissolve animations:^
           {
@@ -336,6 +346,77 @@
          [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TIMELINE_CHANGED object:nil userInfo:nil];
      }
                                           failure:^(NSError * error)
+     {
+     }];
+}
+
+- (void)acceptFollowRequest:(UIButton*)sender
+{
+    int rowIndex = (int)sender.tag;
+    AppNotification *notificationObj = [listOfNotifications objectAtIndex:rowIndex];
+    Friend *friendObject = [[Friend alloc] init];
+    friendObject.objectId = notificationObj.actor.objectId;
+    
+    [[ConnectionManager sharedManager].userObject acceptFriend:friendObject.objectId];
+    
+    //Animate Accept Button then hide its container and show follow button
+    [sender.layer removeAllAnimations];
+    [UIView animateKeyframesWithDuration:1.0
+                                   delay:0.0
+                                 options:UIViewKeyframeAnimationOptionCalculationModeLinear
+                              animations:^{
+                                  [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.5 animations:^{
+                                      sender.alpha = 0.0;
+                                      sender.transform = CGAffineTransformScale(sender.transform, 0.5, 0.5);
+                                  }];
+                                  [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
+                                      sender.alpha = 1.0;
+                                      sender.transform = CGAffineTransformScale(sender.transform, 2.0, 2.0);
+                                  }];
+                              } completion:^(BOOL finished)
+     {
+         [sender.layer removeAllAnimations];
+         //hide accept/reject container view
+         [[(UIView *)sender superview] setHidden:YES];
+         //update cell
+         NotificationFollowListCell *cell = (NotificationFollowListCell *)[[[(UIView *)sender superview] superview] superview];
+         [cell.followButton setHidden:NO];
+     }];
+    
+    // acceptFollowRequest
+    [[ConnectionManager sharedManager] acceptFollowRequest:friendObject.objectId success:^(void)
+     {
+         // notify about timeline changes
+         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TIMELINE_CHANGED object:nil userInfo:nil];
+     }
+                                                   failure:^(NSError * error)
+     {
+     }];
+}
+
+
+- (void)rejectFollowRequest:(UIButton*)sender
+{
+    int rowIndex = (int)sender.tag;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowIndex inSection:0];
+    
+    AppNotification *notificationObj = [listOfNotifications objectAtIndex:rowIndex];
+    NSString *userId = notificationObj.actor.objectId;
+    
+    [[ConnectionManager sharedManager].userObject rejectFriend:userId];
+    //hide accept/reject container view
+    [[(UIView *)sender superview] setHidden:YES];
+    //remove cell
+    [listOfNotifications removeObject:notificationObj];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+    // rejectFollowRequest
+    [[ConnectionManager sharedManager] rejectFollowRequest:userId success:^(void)
+     {
+         // notify about timeline changes
+         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TIMELINE_CHANGED object:nil userInfo:nil];
+     }
+                                                   failure:^(NSError * error)
      {
      }];
 }

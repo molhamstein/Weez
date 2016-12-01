@@ -74,6 +74,8 @@
     // fill the corresponding object according to the notification Type
     switch (type) {
         case kAppNotificationTypeSomeoneStartedFollowingYou:
+        case kAppNotificationTypeSomeoneWantToFollowYou:
+        case kAppNotificationTypeSomeoneAcceptYourFollowRequest:
             user = [[User alloc] init];
             [user fillWithJSON:[jsonObject objectForKey:@"object"]];
             break;

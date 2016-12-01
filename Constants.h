@@ -208,7 +208,9 @@ typedef enum {
     kAppNotificationTypeSomeoneAddedYouToGroup = 2,
     kAppNotificationTypeNewMessageInGroup = 3,
     kAppNotificationTypeNewMessageInChat = 4,
-    kAppNotificationTypeSomeoneMentionedYouInEvent = 5
+    kAppNotificationTypeSomeoneMentionedYouInEvent = 5,
+    kAppNotificationTypeSomeoneWantToFollowYou = 6,
+    kAppNotificationTypeSomeoneAcceptYourFollowRequest = 7,
 } AppNotificationType;
 
 // timelines colletions Types
