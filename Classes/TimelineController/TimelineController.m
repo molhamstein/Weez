@@ -286,9 +286,9 @@
     if(activeTimeline.isPrivate && isUserRelatedTimeline)
     {
         [shareButton setHidden:YES];//prevent social share for private media
+        [mentionButton setHidden:YES];
         if(!isMyProfile)
         {
-            [mentionButton setHidden:YES];
             [boostButton setHidden:YES];
             if (![activeTimeline isFollowing])
             {
