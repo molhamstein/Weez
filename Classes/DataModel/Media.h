@@ -23,6 +23,7 @@
     Location *location;
     Event *event;
     BOOL isMediaBoosted;
+    BOOL isMediaViewed;
 }
 
 @property (nonatomic,retain) NSString *objectId;
@@ -35,6 +36,7 @@
 @property (nonatomic,retain) Event *event;
 @property (nonatomic, retain) NSString *largeWideThumb;
 @property (nonatomic) BOOL isMediaBoosted;
+@property (nonatomic) BOOL isMediaViewed;
 
 - (void)fillWithJSON:(NSDictionary*)jsonObject;
 - (NSURL*)fetchLocalURL;

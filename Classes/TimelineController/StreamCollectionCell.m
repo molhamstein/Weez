@@ -15,11 +15,13 @@
 @synthesize thumbnailImageView;
 @synthesize selectedView;
 @synthesize redImageView;
+@synthesize topBarView;
+@synthesize thumbnailImageViewHieght;
 
 #pragma mark -
 #pragma mark Cell main functions
 // Set content for stream cell
-- (void)populateCellWithContent:(NSString*)image withSelected:(BOOL)isBlinkSelected
+- (void)populateCellWithContent:(NSString*)image withSelected:(BOOL)isBlinkSelected withViewed:(BOOL)isViewed
 {
     thumbnailImageView.contentMode = UIViewContentModeScaleAspectFill;
     // set icon
@@ -42,11 +44,24 @@
         completion:^(BOOL finished)
         {
         }];
+        //make selected cell larger
+        [UIView animateWithDuration:0.5 animations:^{
+            thumbnailImageViewHieght.constant = 64;
+            //[self layoutIfNeeded];
+        }];
         [self animateSelected];
     }else{
         [self.redImageView.layer removeAllAnimations];
+        [UIView animateWithDuration:0.5 animations:^{
+            thumbnailImageViewHieght.constant = 48;
+            //[self layoutIfNeeded];
+        }];
     }
     
+    //show top bar when media is seen before and hide if it's playing now
+    [topBarView setHidden:!isViewed];
+    if(isBlinkSelected)
+        [topBarView setHidden:YES];
     
     // flip direction
     // EN case
@@ -59,6 +74,8 @@
 
 -(void)animateSelected{
     [self.redImageView.layer removeAllAnimations];
+    
+    //animate red circle indicater
     [UIView animateKeyframesWithDuration:1.0
                                    delay:0.0
                                  options:UIViewKeyframeAnimationOptionCalculationModeLinear|UIViewKeyframeAnimationOptionRepeat

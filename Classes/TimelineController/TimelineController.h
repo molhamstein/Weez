@@ -150,6 +150,8 @@
 - (IBAction)openLocationAction:(id)sender;
 - (IBAction)unwindMentionSegue:(UIStoryboardSegue*)segue;
 - (IBAction)actionPause:(id)sender;
+-(IBAction)playPreviousMedia:(id)sender;
+-(IBAction)playNextMedia:(id)sender;
 - (void)setTimelineObject:(Timeline*)timelineObj withLocation:(Location*)location orEvent:(Event*)event;
 - (void)setMediaList:(NSMutableArray*)mediaList withSelectedIndex:(int)indexToPlay;
 @end
