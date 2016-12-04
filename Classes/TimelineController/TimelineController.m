@@ -78,7 +78,6 @@
     [self configurePlayerView];
     // hide player
     //[playContainerView setHidden:YES];
-    [self showDetailsView:NO];
     [self showActionsButtons:NO];
     [self showMediaSellectionFooter:NO fullHide:NO];
     
@@ -224,6 +223,12 @@
         swipeabaleLayout.hidden = YES;
     }
     
+    
+    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeDown)];
+    [swipeGesture setDirection:UISwipeGestureRecognizerDirectionDown];
+    [overlayButton addGestureRecognizer: swipeGesture];
+    
+    
     self.swipeabaleLayoutXCenterConstraint.constant = (self.view.frame.size.width);
     hasNextTimeline = NO;
     hasPrevTimeline = NO;
@@ -276,6 +281,7 @@
     progressImageView.clipsToBounds = YES;
     progressImageView.layer.cornerRadius = 1.5;
     [detailsView addSubview:progressImageView];
+    [self showDetailsView:YES];
 }
 
 -(void) updatePrivacyView
@@ -643,9 +649,6 @@
     if (isFirstTime)
     {
         [self startVideoMode];
-        if(isDetailVisible)
-            [self showDetailsView:NO];
-        
         return;
     }
     // play
@@ -657,8 +660,6 @@
     {
         [self pause];
     }
-    if(isDetailVisible)
-        [self showDetailsView:NO];
 }
 
 // Start video mode
@@ -889,6 +890,7 @@
     //    if(show == actionsVisible)
     //        return;
     //
+    [infoButton setHidden:YES];
     isMediaControllsVisible = show;
     if(show){
         self.boostButtonLeadingConstraint.constant = 12;
@@ -906,7 +908,6 @@
             [self.infoButton layoutIfNeeded];
             pauseButton.alpha = 1.0;
         }];
-        [infoButton setHidden:NO];
     }else{
         self.boostButtonLeadingConstraint.constant = -60;
         self.mentionButtonTrailingConstraint.constant = -60;
@@ -980,8 +981,6 @@
     [self stopVideoMode];
     [pauseButton setImage:[UIImage imageNamed:@"videoPlayIcon"] forState:UIControlStateNormal];
     //[self showMediaSellectionFooter:YES fullHide:NO];
-    if(isDetailVisible)
-        [self showDetailsView:NO];
 }
 
 -(void) play{
@@ -993,8 +992,6 @@
     [self startVideoMode];
     [pauseButton setImage:[UIImage imageNamed:@"videoPauseIcon"] forState:UIControlStateNormal];
     //[self showMediaSellectionFooter:NO fullHide:NO];
-    if(isDetailVisible)
-        [self showDetailsView:NO];
 }
 
 -(void) didFinishMedia{
@@ -1043,8 +1040,26 @@
         [self showMediaSellectionFooter:YES fullHide:NO];
     }
     
-    if(isDetailVisible)
-        [self showDetailsView:NO];
+}
+
+-(IBAction)playNextMedia:(id)sender
+{
+    if (playIndex >= [listOfMedia count] - 1)
+        return;
+    
+    // play next media
+    playIndex++;
+    [self playCurrentMedia];
+}
+
+-(IBAction)playPreviousMedia:(id)sender
+{
+    if (playIndex == 0)
+        return;
+    
+    // play previous media
+    playIndex--;
+    [self playCurrentMedia];
 }
 
 // Play for certain path
@@ -1257,7 +1272,6 @@
         
         if(loadNext){
             [self showMediaSellectionFooter:NO fullHide:NO];
-            [self showDetailsView:NO];
             [self showActionsButtons:NO];
         }
         
@@ -1327,6 +1341,11 @@
     }
 }
 
+-(void) didSwipeDown
+{
+    [self cancelAction:nil];
+}
+
 #pragma mark -
 #pragma mark SSVideoPlayerDelegate
 // Video player is ready
@@ -1392,7 +1411,7 @@
     BOOL isSelected = NO;
     if (indexPath.row == playIndex)
         isSelected = YES;
-    [cell populateCellWithContent:model.thumbLink withSelected:isSelected];
+    [cell populateCellWithContent:model.thumbLink withSelected:isSelected withViewed:model.isMediaViewed];
     return cell;
 }
 
@@ -1417,7 +1436,11 @@
 // Item size
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == playIndex)
+        return CGSizeMake(48, 64);
+    
     return CGSizeMake(32, 64);
+        
 }
 
 #pragma mark -

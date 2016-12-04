@@ -21,6 +21,7 @@
 @synthesize largeWideThumb;
 @synthesize boostCount;
 @synthesize isMediaBoosted;
+@synthesize isMediaViewed;
 
 #pragma mark -
 #pragma mark Media Object
@@ -44,6 +45,7 @@
     largeWideThumb = [decoder decodeObjectForKey:@"largeWideThumb"];
     boostCount = [decoder decodeIntForKey:@"boostCount"];
     isMediaBoosted = [decoder decodeBoolForKey:@"isBoosted"];
+    isMediaViewed = [decoder decodeBoolForKey:@"isMediaViewed"];
     return self;
 }
 
@@ -62,6 +64,7 @@
     [encoder encodeObject:largeWideThumb forKey:@"largeWideThumb"];
     [encoder encodeInt:boostCount forKey:@"boostCount"];
     [encoder encodeBool:isMediaBoosted forKey:@"isBoosted"];
+    [encoder encodeBool:isMediaViewed forKey:@"isMediaViewed"];
 }
 
 // Fill Media object form json object
@@ -77,6 +80,7 @@
     duration = [[jsonObject objectForKey:@"duration"] intValue];
     boostCount = [[jsonObject objectForKey:@"boostCount"] intValue];
     isMediaBoosted = [[jsonObject objectForKey:@"isBoosted"] boolValue];
+    isMediaViewed = [[jsonObject objectForKey:@"isViewed"] boolValue];
     location = [[Location alloc] init];
     location.objectId = @"";
     // we have to fill the location if exist

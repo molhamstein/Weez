@@ -12,14 +12,18 @@
 {
     UIImageView *thumbnailImageView;
     UIView *selectedView;
+    UIView *topBarView;
     UIImageView *redImageView;
     BOOL blinkingSelected;
+    NSLayoutConstraint *thumbnailImageViewHieght;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView *thumbnailImageView;
 @property(nonatomic, retain) IBOutlet UIView *selectedView;
+@property(nonatomic, retain) IBOutlet UIView *topBarView;
 @property(nonatomic, retain) IBOutlet UIImageView *redImageView;
+@property(nonatomic, retain) IBOutlet NSLayoutConstraint *thumbnailImageViewHieght;
+- (void)populateCellWithContent:(NSString*)image withSelected:(BOOL)isBlinkSelected withViewed:(BOOL)isViewed;
 
-- (void)populateCellWithContent:(NSString*)image withSelected:(BOOL)isSelected;
 
 @end
