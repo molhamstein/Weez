@@ -124,6 +124,7 @@
     locationFollowers = [[jsonObject objectForKey:@"followersCount"] intValue];
     status = [[jsonObject objectForKey:@"status"] intValue];
     isPrivateLocation = [[jsonObject objectForKey:@"private"] intValue];
+    isUnDefinedPlace = ![[jsonObject objectForKey:@"isDefined"] intValue];
     totalMediaDuration = [[jsonObject objectForKey:@"totalMediaDuration"] floatValue];
     timelines = [[NSMutableArray alloc] init];
     //users

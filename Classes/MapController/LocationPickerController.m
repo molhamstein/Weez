@@ -316,8 +316,16 @@ typedef enum{
     
     // make sure to open the locations list if its closed
     // this list will be closed the first time we open the sceen till we get some data to show
-    if(locationsListStatus == detailsViewStatusClosed){
-        [self openDetailsView];
+    // also details will be closed if we have no locations to show
+    if( (listOfLocationsAndEvents && [listOfLocationsAndEvents count] >0) ||
+        (listOfPlaces && [listOfPlaces count] >0)){
+            if(locationsListStatus == detailsViewStatusClosed){
+                [self openDetailsView];
+            }
+    }else{
+        if(locationsListStatus != detailsViewStatusClosed){
+            [self closeDetailsView];
+        }
     }
     
     [self reloadMapAnnotations];
@@ -451,28 +459,35 @@ typedef enum{
 #pragma mark Tableview data source
 // Number of sections
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if(listOfLocationsAndEvents && listOfPlaces && [listOfPlaces count]>0 && [listOfLocationsAndEvents count]>0)
-        return 2;
-    else
-        return 1;
+    return 3;
+//    if(listOfLocationsAndEvents && listOfPlaces && [listOfPlaces count]>0 && [listOfLocationsAndEvents count]>0)
+//        return 2;
+//    else
+//        return 1;
 }
 
 // Height for header
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if(section == 0)
+        return 0;
     return 30.0f;
 }
 
 // Header title for each section
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    TimelineHeaderCell *header = (TimelineHeaderCell *)[tableView dequeueReusableCellWithIdentifier:@"timelineHeaderCell"];
-    NSString *title;
-    if(section == 0)
-        title = [[AppManager sharedManager]getLocalizedString:@"PICK_LOCATION_WEEZ_LOCATIONS_TITLE"];
-    else
-        title = [[AppManager sharedManager]getLocalizedString:@"PICK_LOCATION_OTHER_LOCATIONS_TITLE"];
-    
-    [header setTitle:title];
-    return header;
+    if(section == 0){
+        return [[UIView alloc] initWithFrame:CGRectZero];
+    }else{
+        TimelineHeaderCell *header = (TimelineHeaderCell *)[tableView dequeueReusableCellWithIdentifier:@"timelineHeaderCell"];
+        NSString *title;
+        if(section == 1)
+            title = [[AppManager sharedManager]getLocalizedString:@"PICK_LOCATION_WEEZ_LOCATIONS_TITLE"];
+        else
+            title = [[AppManager sharedManager]getLocalizedString:@"PICK_LOCATION_OTHER_LOCATIONS_TITLE"];
+        
+        [header setTitle:title];
+        return header;
+    }
 }
 
 // Footer height
@@ -487,18 +502,25 @@ typedef enum{
 
 // Height for row at index path
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section == 0)
+        return CELL_LOCATION_HEIGHT -4; // current location cell is a bit smaller
     return CELL_LOCATION_HEIGHT;
 }
 
 // Number of rows
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(section == 0){
+        if(!allowSelectingCoordinates || ([AppManager sharedManager].currenttUserLocation.coordinate.latitude == 0 && [AppManager sharedManager].currenttUserLocation.coordinate.longitude == 0))
+            return 0;
+        else
+            return 1;
+    }else if(section == 1){
         if(listOfLocationsAndEvents)
             return [listOfLocationsAndEvents count];
         return 0;
     }else{
         if(listOfPlaces)
-            return  [listOfPlaces count];
+            return [listOfPlaces count];
         return 0;
     }
 }
@@ -507,6 +529,20 @@ typedef enum{
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier1 = @"locationListCell";
     if(indexPath.section == 0){
+        LocationListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1 forIndexPath:indexPath];
+        Location *currentLocation = [[Location alloc] init];
+        currentLocation.latitude = [AppManager sharedManager].currenttUserLocation.coordinate.latitude;
+        currentLocation.longitude = [AppManager sharedManager].currenttUserLocation.coordinate.longitude;
+        currentLocation.address = [NSString stringWithFormat:@"(%f, %f)",currentLocation.latitude, currentLocation.longitude];
+        currentLocation.name = [[AppManager sharedManager] getLocalizedString:@"PICK_LOCATION_CURRENT_LOCATION"];
+        // check if selected custom location is valid and is equal to currnet location
+        bool isCurrentLocationSelected = CLLocationCoordinate2DIsValid(_customSelectedCoord);
+        isCurrentLocationSelected &= currentLocation.latitude == (float)_customSelectedCoord.latitude;
+        isCurrentLocationSelected &= currentLocation.longitude == (float)_customSelectedCoord.longitude;
+        
+        [cell populateCellWithContent:currentLocation withSelected:isCurrentLocationSelected];
+        return cell;
+    }else if(indexPath.section == 1){
         // location list cell
         LocationListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1 forIndexPath:indexPath];
         if([[listOfLocationsAndEvents objectAtIndex:indexPath.row] isMemberOfClass:[Location class]]){
@@ -517,7 +553,7 @@ typedef enum{
             [cell populateCellWithEventContent:locationObj isSelected:[_selectedEvent.objectId isEqual:locationObj.objectId]];
         }
         return cell;
-    }else{
+    }else{ // places cell
         // location list cell
         LocationListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1 forIndexPath:indexPath];
         Location *locationObj = [listOfPlaces objectAtIndex:indexPath.row];
@@ -538,7 +574,9 @@ typedef enum{
     // invalidate any previously selected coordinate
     _customSelectedCoord = kCLLocationCoordinate2DInvalid;
     
-    if(indexPath.section == 0){ // locations and events section
+    if(indexPath.section == 0){
+        [self mapView:_googleMapView didTapAtCoordinate:[AppManager sharedManager].currenttUserLocation.coordinate];
+    }else if(indexPath.section == 1){ // locations and events section
         if([[listOfLocationsAndEvents objectAtIndex:indexPath.item] isMemberOfClass:[Location class]]){
             Location *newSelectedLocation = [listOfLocationsAndEvents objectAtIndex:indexPath.row];
             // select/ deselect location

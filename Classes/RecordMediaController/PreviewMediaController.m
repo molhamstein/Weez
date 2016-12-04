@@ -38,6 +38,7 @@
 @synthesize isPreviewOnly;
 @synthesize addTagButton;
 @synthesize selectedLocation;
+@synthesize selectedEvent;
 
 #pragma mark -
 #pragma mark View Controller
@@ -437,7 +438,7 @@
         // pass the active user to profile page
         UINavigationController *navController = [segue destinationViewController];
         LocationPickerController *locationListController = (LocationPickerController*)[navController viewControllers][0];
-        [locationListController prepareControllerWithlimitToOnlyNearLocations:recordMediaFor == kRecordMediaForTimeline initialMapPos:kCLLocationCoordinate2DInvalid enableTags:YES allowSelectingCoordinates:NO parentViewController:self];
+        [locationListController prepareControllerWithlimitToOnlyNearLocations:recordMediaFor == kRecordMediaForTimeline initialMapPos:kCLLocationCoordinate2DInvalid enableTags:recordMediaFor == kRecordMediaForTimeline allowSelectingCoordinates:recordMediaFor != kRecordMediaForTimeline parentViewController:self];
         locationListController.listOfTags = hashtags;
         
     }else if([[segue identifier] isEqualToString:@"previewMediaCoordinatesDetailsSegue"]){
@@ -471,6 +472,10 @@
     if(CLLocationCoordinate2DIsValid(detailsController.customSelectedCoord)){
         locationLabel.text = [[AppManager sharedManager] getLocalizedString:@"PRIVATE_LOCATION_NAME_PLACESHOLDER"];
         locationImageView.image = nil;
+        selectedLocation = [[Location alloc] initUndefinedWithCoords:detailsController.customSelectedCoord];
+        locationId = nil;
+        selectedEvent = nil;
+        eventId = @"";
     }else if (detailsController.selectedLocation != nil || detailsController.selectedEvent != nil)
     {
         if(detailsController.selectedLocation){

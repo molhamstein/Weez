@@ -29,6 +29,9 @@
     // display name and username
     locationLabel.font = [[AppManager sharedManager] getFontType:kAppFontCellTitle];
     locationLabel.text = locationObject.name;
+    
+    addressLabel.font = [[AppManager sharedManager] getFontType:kAppFontDescription];
+    addressLabel.text = locationObject.address;
     // location image
     locationImageView.contentMode = UIViewContentModeScaleAspectFill;
     locationImageView.layer.masksToBounds = YES;

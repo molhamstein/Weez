@@ -100,7 +100,23 @@
 - (void)leaveGroup:(NSString*)groupId success:(void (^)())leaveGroupSuccess failure:(void (^)(NSError *error))leaveGroupFailure;
 - (void)getGroup:(Group*)group success:(void (^)(Group *group))onSuccess failure:(void (^)(NSError *error))onFailure;
 - (void)getChat:(NSString*)userId success:(void (^)(Group *group))onSuccess failure:(void (^)(NSError *error))onFailure;
-- (void)sendChatMessage:(NSString *) messsage ToGroup:(Group*)group mediaType:(MediaType) mediaType media:(id) media withFileURL:(NSURL *)fileURL orLocationMessageAt:(Location*) coordinates withLocationId:(NSString*)locationId orCustomLocation:(Location*)customLocation asReplyToMessage:(NSString*)originalMsgId inOriginalGroup:(NSString*)originalGrroupId sharedTimelineId:(NSString*)sharedTimelineId sharedLocationId:(NSString*)sharedLocationId sharedEventId:(NSString*)sharedEventId success:(void (^)())onSuccess failure:(void (^)(NSError *error, NSString *errorMsg))onFailure;
+- (void)sendChatMessage:(NSString *) messsage
+                ToGroup:(Group*)group
+              mediaType:(MediaType) mediaType
+                  media:(id) media
+            withFileURL:(NSURL *)fileURL
+    orLocationMessageAt:(Location*) coordinates
+   orEventIdForCoordsAt:(NSString*)eventIdForCoordinates
+         withLocationId:(NSString*)locationId
+              orEventId:(NSString*)mediaEventId
+       orCustomLocation:(Location*)customLocation
+       asReplyToMessage:(NSString*)originalMsgId
+        inOriginalGroup:(NSString*)originalGrroupId
+       sharedTimelineId:(NSString*)sharedTimelineId
+       sharedLocationId:(NSString*)sharedLocationId
+          sharedEventId:(NSString*)sharedEventId
+                success:(void (^)())onSuccess
+                failure:(void (^)(NSError *error, NSString *errorMsg))onFailure;
 // Devices
 - (void)registerDeviceForNotification:(NSString*)deviceID success:(void (^)())registerDeviceSuccess failure:(void (^)(NSError *error))registerDeviceFailure;
 // Sign up register user

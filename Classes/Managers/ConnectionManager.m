@@ -980,9 +980,12 @@ ConnectionManager* m_pgAsyncDataManager = nil;
         return;
     // needed data
     NSMutableDictionary* neededDic = [[NSMutableDictionary alloc] init];
-    [neededDic setObject:location.name forKey:@"name"];
-    [neededDic setObject:location.objectId forKey:@"placeId"];
-    [neededDic setObject:location.address forKey:@"address"];
+    if(location.name)
+        [neededDic setObject:location.name forKey:@"name"];
+    if(location.objectId)
+        [neededDic setObject:location.objectId forKey:@"placeId"];
+    if(location.address)
+        [neededDic setObject:location.address forKey:@"address"];
     [neededDic setObject:[NSNumber numberWithFloat:location.latitude] forKey:@"lat"];
     [neededDic setObject:[NSNumber numberWithFloat:location.longitude ] forKey:@"long"];
     [neededDic setObject:[NSNumber numberWithBool:location.isUnDefinedPlace ] forKey:@"private"];
@@ -2714,7 +2717,23 @@ ConnectionManager* m_pgAsyncDataManager = nil;
 @param coordinates: coordinates used to create a location message this type of message contains only coordinates that can be showed on map
 @param locationId: optional id of location to attach with the media message currently used only with photo and video messages
 @param locationId: when not nil we will create a private location on the api before submitting the message and use the id of the newly created location as locationId */
-- (void)sendChatMessage:(NSString *) messsage ToGroup:(Group*)group mediaType:(MediaType) mediaType media:(id) media withFileURL:(NSURL *)fileURL orLocationMessageAt:(Location*) coordinates withLocationId:(NSString*)locationId orCustomLocation:(Location*)customLocation asReplyToMessage:(NSString*)originalMsgId inOriginalGroup:(NSString*)originalGrroupId sharedTimelineId:(NSString*)sharedTimelineId sharedLocationId:(NSString*)sharedLocationId sharedEventId:(NSString*)sharedEventId success:(void (^)())onSuccess failure:(void (^)(NSError *error, NSString *errorMsg))onFailure
+- (void)sendChatMessage:(NSString *) messsage
+                ToGroup:(Group*)group
+              mediaType:(MediaType) mediaType
+                  media:(id) media
+            withFileURL:(NSURL *)fileURL
+    orLocationMessageAt:(Location*) coordinates
+    orEventIdForCoordsAt:(NSString*)eventIdForCoordinates
+         withLocationId:(NSString*)locationId
+         orEventId:(NSString*)mediaEventId
+       orCustomLocation:(Location*)customLocation
+       asReplyToMessage:(NSString*)originalMsgId
+        inOriginalGroup:(NSString*)originalGrroupId
+       sharedTimelineId:(NSString*)sharedTimelineId
+       sharedLocationId:(NSString*)sharedLocationId
+          sharedEventId:(NSString*)sharedEventId
+                success:(void (^)())onSuccess
+                failure:(void (^)(NSError *error, NSString *errorMsg))onFailure
 {
     // user logged out
     if (! [[ConnectionManager sharedManager] isUserLoggedIn])
@@ -2739,7 +2758,12 @@ ConnectionManager* m_pgAsyncDataManager = nil;
             [neededDataDic setObject:[NSNumber numberWithFloat:coordinates.latitude] forKey:@"lat"];
             [neededDataDic setObject:[NSNumber numberWithFloat:coordinates.longitude] forKey:@"long"];
         }
+    }else if(eventIdForCoordinates){
+        [neededDataDic setObject:eventIdForCoordinates forKey:@"eventId"];
     }
+    
+    if(mediaEventId)
+        [neededDataDic setObject:mediaEventId forKey:@"eventId"];
     
     if(locationId){
         [neededDataDic setObject:locationId forKey:@"locationId"];
@@ -2756,7 +2780,7 @@ ConnectionManager* m_pgAsyncDataManager = nil;
     if(customLocation){
         [self createLocation:(Location *) customLocation success:^(Location * createdLocation) {
             if(createdLocation){
-                [self sendChatMessage:messsage ToGroup:group mediaType:mediaType media:media withFileURL:fileURL orLocationMessageAt:coordinates withLocationId:createdLocation.objectId orCustomLocation:nil asReplyToMessage:originalMsgId inOriginalGroup:originalGrroupId sharedTimelineId:sharedTimelineId sharedLocationId:sharedLocationId sharedEventId:sharedEventId success:onSuccess failure:onFailure];
+                [self sendChatMessage:messsage ToGroup:group mediaType:mediaType media:media withFileURL:fileURL orLocationMessageAt:coordinates orEventIdForCoordsAt:nil withLocationId:createdLocation.objectId orEventId:nil orCustomLocation:nil asReplyToMessage:originalMsgId inOriginalGroup:originalGrroupId sharedTimelineId:sharedTimelineId sharedLocationId:sharedLocationId sharedEventId:sharedEventId success:onSuccess failure:onFailure];
             }else{
                 onFailure(nil, nil);
             }

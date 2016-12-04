@@ -458,6 +458,8 @@
 "PICK_LOCATION_OTHER_LOCATIONS_TITLE_AR"    = "مواقع اخرى";
 "PICK_LOCATION_TITLE_AR"                    = "اختيار الموقع";
 "PICK_LOCATION_TITLE_EN"                    = "Pick Location";
+"PICK_LOCATION_CURRENT_LOCATION_AR"         = "الموقع الحالي";
+"PICK_LOCATION_CURRENT_LOCATION_EN"         = "Your Current Location";
 
 
 // Group Chat

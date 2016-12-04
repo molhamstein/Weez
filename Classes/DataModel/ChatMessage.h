@@ -20,7 +20,9 @@
     NSDate *date;
     NSString *text;
     Media *media;
+    
     Location *location;
+    Event *event;
     
     ChatMessage *parentMessage;
     NSString *groupId;
@@ -36,7 +38,12 @@
 @property (nonatomic,retain) NSDate *date;
 @property (nonatomic,retain) NSString *text;
 @property (nonatomic,retain) Media *media;
+
+/// used to share the coordinates of a location or event
+/// locations can be a weezLocation, Google places, or a random coordinates
 @property (nonatomic,retain) Location *location;
+@property (nonatomic,retain) Event *event;
+
 @property (nonatomic,retain) ChatMessage *parentMessage;
 @property (nonatomic,retain) NSString *groupId;
 

@@ -1,3 +1,4 @@
+
 //
 //  ChatController.m
 //  Weez
@@ -414,18 +415,23 @@
     // get selected location from previous controller to submit with message
     Location * customLocation = nil;
     NSString *locationId = nil;
+    NSString *eventId = nil;
     if(detailsController.selectedLocation){
-        if(detailsController.selectedLocation.isUnDefinedPlace){ // google places location
+        if(!detailsController.selectedLocation.objectId){ // custom coordinates selected
+            customLocation = detailsController.selectedLocation;
+        }if(detailsController.selectedLocation.isUnDefinedPlace){ // google places location
             customLocation = detailsController.selectedLocation;
         }else{
             locationId = detailsController.selectedLocation.objectId;
         }
+    }else if(detailsController.selectedEvent){
+        eventId = detailsController.selectedEvent.objectId;
     }
     
     if (detailsController.pickedImage != nil){ // user captured image
-        [self submitPhotoMessage:detailsController.pickedImage withDate:[NSDate dateWithTimeIntervalSinceNow:0] inLoactionWithId:locationId orCustomLocation:customLocation];
+        [self submitPhotoMessage:detailsController.pickedImage withDate:[NSDate dateWithTimeIntervalSinceNow:0] inLoactionWithId:locationId orEventId:eventId orCustomLocation:customLocation];
     }else if(detailsController.videoURL != nil){ // user recorded video
-        [self submitVideoMessage:detailsController.videoURL withDate:[NSDate dateWithTimeIntervalSinceNow:0] inLoactionWithId:locationId orCustomLocation:customLocation];
+        [self submitVideoMessage:detailsController.videoURL withDate:[NSDate dateWithTimeIntervalSinceNow:0] inLoactionWithId:locationId orEventId:eventId orCustomLocation:customLocation];
     }
 }
 
@@ -436,11 +442,11 @@
     // user selected map coordinates
     if(CLLocationCoordinate2DIsValid(detailsController.customSelectedCoord)){
         Location *pickedLocation = [[Location alloc] initUndefinedWithCoords:detailsController.customSelectedCoord];
-        [self submitLocationMessage:pickedLocation withDate:[NSDate dateWithTimeIntervalSinceNow:0]];
+        [self submitLocationMessage:pickedLocation orEvent:nil withDate:[NSDate dateWithTimeIntervalSinceNow:0]];
     }else if(detailsController.selectedLocation){
-        [self submitLocationMessage:detailsController.selectedLocation withDate:[NSDate dateWithTimeIntervalSinceNow:0]];
+        [self submitLocationMessage:detailsController.selectedLocation orEvent:nil withDate:[NSDate dateWithTimeIntervalSinceNow:0]];
     }else if(detailsController.selectedEvent){
-        //[self submitLocationMessage:detailsController.selectedLocation withDate:[NSDate dateWithTimeIntervalSinceNow:0]];
+        [self submitLocationMessage:nil orEvent:detailsController.selectedEvent withDate:[NSDate dateWithTimeIntervalSinceNow:0]];
     }
     
 }
@@ -509,7 +515,7 @@
     if(!group.objectId)
         return;
     ChatMessage *templOriginalMsg = messageToReplyTo;
-    [[ConnectionManager sharedManager] sendChatMessage:text ToGroup:group mediaType:kMediaTypeText media:nil withFileURL:nil orLocationMessageAt:nil withLocationId:nil orCustomLocation:nil asReplyToMessage:messageToReplyTo.objectId inOriginalGroup:self.messageToReplyToOriginalGroupId sharedTimelineId:nil sharedLocationId:nil sharedEventId:nil success:^{
+    [[ConnectionManager sharedManager] sendChatMessage:text ToGroup:group mediaType:kMediaTypeText media:nil withFileURL:nil orLocationMessageAt:nil orEventIdForCoordsAt:nil withLocationId:nil orEventId:nil orCustomLocation:nil asReplyToMessage:messageToReplyTo.objectId inOriginalGroup:self.messageToReplyToOriginalGroupId sharedTimelineId:nil sharedLocationId:nil sharedEventId:nil success:^{
         [[ConnectionManager sharedManager] submitLog:[NSString stringWithFormat:@"chat start submitSuccessBlock" ] success:^{}];
         [self updateGroup];
         [self actionCanselMsgPreview];
@@ -570,11 +576,11 @@
     [[ConnectionManager sharedManager] submitLog:[NSString stringWithFormat:@"chat end submitTextMessage:%@" ,text] success:^{}];
 }
 
-- (void) submitPhotoMessage:(UIImage *) photo withDate:(NSDate *) date inLoactionWithId:(NSString *)locationId orCustomLocation:(Location*)customLocation{
+- (void) submitPhotoMessage:(UIImage *) photo withDate:(NSDate *) date inLoactionWithId:(NSString *)locationId orEventId:(NSString*)eventId orCustomLocation:(Location*)customLocation{
     if(!group.objectId)
         return;
     ChatMessage *templOriginalMsg = messageToReplyTo;
-    [[ConnectionManager sharedManager] sendChatMessage:@"" ToGroup:group mediaType:kMediaTypeImage media:photo withFileURL:nil orLocationMessageAt:nil withLocationId:locationId orCustomLocation:customLocation asReplyToMessage:messageToReplyTo.objectId inOriginalGroup:self.messageToReplyToOriginalGroupId sharedTimelineId:nil sharedLocationId:nil sharedEventId:nil success:^{
+    [[ConnectionManager sharedManager] sendChatMessage:@"" ToGroup:group mediaType:kMediaTypeImage media:photo withFileURL:nil orLocationMessageAt:nil orEventIdForCoordsAt:nil withLocationId:locationId orEventId:eventId orCustomLocation:customLocation asReplyToMessage:messageToReplyTo.objectId inOriginalGroup:self.messageToReplyToOriginalGroupId sharedTimelineId:nil sharedLocationId:nil sharedEventId:nil success:^{
         blockUpdates = NO;
         inSubmissionImage = nil;
         [self updateGroup];
@@ -596,7 +602,7 @@
                     if(inSubmissionImage != nil){
                         lastMessageId = @"";
                         [self publishGroupData:group]; // to remove the temporary message we added
-                        [self submitPhotoMessage:inSubmissionImage withDate:[NSDate dateWithTimeIntervalSinceNow:0] inLoactionWithId:locationId orCustomLocation:customLocation];
+                        [self submitPhotoMessage:inSubmissionImage withDate:[NSDate dateWithTimeIntervalSinceNow:0] inLoactionWithId:locationId orEventId:eventId orCustomLocation:customLocation];
                     }
                 }
                 [alertView close];
@@ -621,11 +627,11 @@
     [self scrollToBottomAnimated:YES];
 }
 
-- (void) submitVideoMessage:(NSURL *) videoUrl withDate:(NSDate *) date inLoactionWithId:(NSString *)locationId orCustomLocation:(Location*)customLocation{
+- (void) submitVideoMessage:(NSURL *) videoUrl withDate:(NSDate *) date inLoactionWithId:(NSString *)locationId orEventId:(NSString*)eventId orCustomLocation:(Location*)customLocation{
     if(!group.objectId)
         return;
     ChatMessage *templOriginalMsg = messageToReplyTo;
-    [[ConnectionManager sharedManager] sendChatMessage:@"" ToGroup:group mediaType:kMediaTypeVideo media:nil withFileURL:videoUrl orLocationMessageAt:nil withLocationId:locationId orCustomLocation:customLocation asReplyToMessage:messageToReplyTo.objectId inOriginalGroup:self.messageToReplyToOriginalGroupId sharedTimelineId:nil sharedLocationId:nil sharedEventId:nil success:^{
+    [[ConnectionManager sharedManager] sendChatMessage:@"" ToGroup:group mediaType:kMediaTypeVideo media:nil withFileURL:videoUrl orLocationMessageAt:nil orEventIdForCoordsAt:nil withLocationId:locationId orEventId:eventId orCustomLocation:customLocation asReplyToMessage:messageToReplyTo.objectId inOriginalGroup:self.messageToReplyToOriginalGroupId sharedTimelineId:nil sharedLocationId:nil sharedEventId:nil success:^{
         blockUpdates = NO;
         inSubmissionVideoURL = nil;
         [self updateGroup];
@@ -648,7 +654,7 @@
                     if(inSubmissionVideoURL != nil){
                         lastMessageId = @"";
                         [self publishGroupData:group]; // to remove the temporary message we added
-                        [self submitVideoMessage:inSubmissionVideoURL withDate:[NSDate dateWithTimeIntervalSinceNow:0] inLoactionWithId:locationId orCustomLocation:customLocation];
+                        [self submitVideoMessage:inSubmissionVideoURL withDate:[NSDate dateWithTimeIntervalSinceNow:0] inLoactionWithId:locationId orEventId:eventId orCustomLocation:customLocation];
                     }
                 }
                 [alertView close];
@@ -677,7 +683,7 @@
     if(!group.objectId)
         return;
     ChatMessage *templOriginalMsg = messageToReplyTo;
-    [[ConnectionManager sharedManager] sendChatMessage:@"" ToGroup:group mediaType:kMediaTypeVideo media:nil withFileURL:nil orLocationMessageAt:nil withLocationId:nil orCustomLocation:nil asReplyToMessage:messageToReplyTo.objectId inOriginalGroup:self.messageToReplyToOriginalGroupId sharedTimelineId:user.objectId sharedLocationId:location.objectId sharedEventId:event.objectId success:^{
+    [[ConnectionManager sharedManager] sendChatMessage:@"" ToGroup:group mediaType:kMediaTypeVideo media:nil withFileURL:nil orLocationMessageAt:nil orEventIdForCoordsAt:nil withLocationId:nil orEventId:nil orCustomLocation:nil asReplyToMessage:messageToReplyTo.objectId inOriginalGroup:self.messageToReplyToOriginalGroupId sharedTimelineId:user.objectId sharedLocationId:location.objectId sharedEventId:event.objectId success:^{
         blockUpdates = NO;
         userToshareAsMessage = nil;
         eventToshareAsMessage = nil;
@@ -730,7 +736,7 @@
     if(!group.objectId)
         return;
     ChatMessage *templOriginalMsg = messageToReplyTo;
-    [[ConnectionManager sharedManager] sendChatMessage:@"" ToGroup:group mediaType:kMediaTypeAudio media:nil withFileURL:audioUrl orLocationMessageAt:nil withLocationId:locationId orCustomLocation:customLocation asReplyToMessage:messageToReplyTo.objectId inOriginalGroup:self.messageToReplyToOriginalGroupId sharedTimelineId:nil sharedLocationId:nil sharedEventId:nil success:^{
+    [[ConnectionManager sharedManager] sendChatMessage:@"" ToGroup:group mediaType:kMediaTypeAudio media:nil withFileURL:audioUrl orLocationMessageAt:nil orEventIdForCoordsAt:nil withLocationId:locationId orEventId:nil orCustomLocation:customLocation asReplyToMessage:messageToReplyTo.objectId inOriginalGroup:self.messageToReplyToOriginalGroupId sharedTimelineId:nil sharedLocationId:nil sharedEventId:nil success:^{
         blockUpdates = NO;
         inSubmissionAudioURL = nil;
         [self updateGroup];
@@ -783,11 +789,11 @@
 
 /// sends the location as a coodiantes messages
 /// the sent location can be either "weez location, google place or undefined coordinates"
-- (void) submitLocationMessage:(Location*) coord withDate:(NSDate *) date{
+- (void) submitLocationMessage:(Location*) coord orEvent:(Event*)event withDate:(NSDate *) date{
     if(!group.objectId)
         return;
     ChatMessage *templOriginalMsg = messageToReplyTo;
-    [[ConnectionManager sharedManager] sendChatMessage:@"" ToGroup:group mediaType:kMediaTypeLocation media:nil withFileURL:nil orLocationMessageAt:coord withLocationId:nil orCustomLocation:nil asReplyToMessage:messageToReplyTo.objectId inOriginalGroup:self.messageToReplyToOriginalGroupId sharedTimelineId:nil sharedLocationId:nil sharedEventId:nil success:^{
+    [[ConnectionManager sharedManager] sendChatMessage:@"" ToGroup:group mediaType:kMediaTypeLocation media:nil withFileURL:nil orLocationMessageAt:coord orEventIdForCoordsAt:event.objectId withLocationId:nil orEventId:nil orCustomLocation:nil asReplyToMessage:messageToReplyTo.objectId inOriginalGroup:self.messageToReplyToOriginalGroupId sharedTimelineId:nil sharedLocationId:nil sharedEventId:nil success:^{
         blockUpdates = NO;
         inSubmissionCoord = nil;
         [self updateGroup];
@@ -811,7 +817,7 @@
                     if(inSubmissionImage != nil){
                         lastMessageId = @"";
                         [self publishGroupData:group]; // to remove the temporary message we added
-                        [self submitLocationMessage:coord withDate:[NSDate dateWithTimeIntervalSinceNow:0]];
+                        [self submitLocationMessage:coord orEvent:event withDate:[NSDate dateWithTimeIntervalSinceNow:0]];
                     }
                 }
                 [alertView close];
@@ -917,8 +923,11 @@
                 item.parentChatMessage = chatMessage.parentMessage;
                 item.hostControllerDelegate = self;
                 mediaItem = item;
-            }else if(chatMessage.location){// location message
-                mediaItem = [[JSQCustomLocationMediaItem alloc] initWithParentMsg:chatMessage.parentMessage Lat:chatMessage.location.latitude andLong:chatMessage.location.longitude showProgress:YES];
+            }else if(chatMessage.location || chatMessage.event){// coords message
+                if(chatMessage.location)
+                    mediaItem = [[JSQCustomLocationMediaItem alloc] initWithParentMsg:chatMessage.parentMessage Lat:chatMessage.location.latitude andLong:chatMessage.location.longitude showProgress:YES];
+                else
+                    mediaItem = [[JSQCustomLocationMediaItem alloc] initWithParentMsg:chatMessage.parentMessage Lat:chatMessage.event.location.latitude andLong:chatMessage.event.location.longitude showProgress:YES];
             // timeline message
             }else if([chatMessage isTimelineMsg]){
                 JSQCustomTimelineMediaItem *item = [[JSQCustomTimelineMediaItem alloc] initWithTimeline:chatMessage.timelineMsgUser orLocation:chatMessage.timelineMsgLocation orEvent:chatMessage.timelineMsgEvent withThumb:chatMessage.thumb];
@@ -1308,19 +1317,26 @@
     if(msg.isMediaMessage){
         id<JSQMessageMediaData> mediaItem = msg.media;
         Location *mediaLocation = nil;
+        Event *mediaEvent = nil;
         if ([mediaItem isMemberOfClass:[JSQCustomPhotoMediaItem class]]) {
             JSQCustomPhotoMediaItem *photoMediaItem = (JSQCustomPhotoMediaItem*) mediaItem;
             mediaLocation = photoMediaItem.chatMessage.media.location;
+            mediaEvent = photoMediaItem.chatMessage.media.event;
         }else if([mediaItem isMemberOfClass:[JSQCustomVideoMediaItemWithThumb class]]){
             JSQCustomVideoMediaItemWithThumb *photoMediaItem = (JSQCustomVideoMediaItemWithThumb*) mediaItem;
             mediaLocation = photoMediaItem.mediaModel.location;
+            mediaEvent = photoMediaItem.mediaModel.event;
         }
         
         NSString *name;
-        if(mediaLocation.isPrivateLocation)
-            name = [[AppManager sharedManager] getLocalizedString:@"PRIVATE_LOCATION_NAME_PLACESHOLDER"];
-        else
-            name = mediaLocation.name;
+        if(mediaEvent){
+            name = mediaEvent.name;
+        }else{
+            if(mediaLocation.isPrivateLocation)
+                name = [[AppManager sharedManager] getLocalizedString:@"PRIVATE_LOCATION_NAME_PLACESHOLDER"];
+            else
+                name = mediaLocation.name;
+        }
         
         if([name length] > 0)
             return [[NSAttributedString alloc] initWithString:name];
@@ -1578,24 +1594,36 @@
             JSQCustomLocationMediaItem *locationItem = (JSQCustomLocationMediaItem *)mediaItem;
             int msgIndexInGroupMessages = [self getMessageIndexInMessagesFromCollectionViewIndexPath:indexPath];
             ChatMessage *msg = [[group messages] objectAtIndex:msgIndexInGroupMessages];
-            if(msg.location.isUnDefinedPlace){ // we dont have this locations among weez locations so hust show it on the map
-                if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]){
-                    [[AppManager sharedManager] openGoogleMapsAppForLat:msg.location.latitude andLong:msg.location.longitude];
-                }else{
-                    selectedCoordinateForPreview = CLLocationCoordinate2DMake(locationItem.latitude, locationItem.longitude);
-                    selectedVideoUrlForPreview = nil;
-                    selectedImageForPreview = nil;
-                    selectedMediaLocationForPreview = nil;
-                    [self performSegueWithIdentifier:@"chatCoordinatesDetailsSegue" sender:self];
-                }
-            }else{ // location is Defined in the system and we should display its details page
+            
+            // event coords message
+            if(msg.event){
                 selectedFriendForTimelinePreview = nil;
-                selectedLocationForTimelinePreview = msg.location;
-                selectedEventForTimelinePreview = nil;
+                selectedLocationForTimelinePreview = nil;
+                selectedEventForTimelinePreview = msg.event;
                 selectedVideoUrlForPreview = nil;
                 selectedImageForPreview = nil;
                 selectedMediaLocationForPreview = nil;
                 [self performSegueWithIdentifier:@"chatTimelinesCollectionSegue" sender:self];
+            }else{
+                if(msg.location.isUnDefinedPlace){ // we dont have this locations among weez locations so hust show it on the map
+                    if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]){
+                        [[AppManager sharedManager] openGoogleMapsAppForLat:msg.location.latitude andLong:msg.location.longitude];
+                    }else{
+                        selectedCoordinateForPreview = CLLocationCoordinate2DMake(locationItem.latitude, locationItem.longitude);
+                        selectedVideoUrlForPreview = nil;
+                        selectedImageForPreview = nil;
+                        selectedMediaLocationForPreview = nil;
+                        [self performSegueWithIdentifier:@"chatCoordinatesDetailsSegue" sender:self];
+                    }
+                }else{ // location is Defined in the system and we should display its details page
+                    selectedFriendForTimelinePreview = nil;
+                    selectedLocationForTimelinePreview = msg.location;
+                    selectedEventForTimelinePreview = nil;
+                    selectedVideoUrlForPreview = nil;
+                    selectedImageForPreview = nil;
+                    selectedMediaLocationForPreview = nil;
+                    [self performSegueWithIdentifier:@"chatTimelinesCollectionSegue" sender:self];
+                }
             }
         }else if([mediaItem isKindOfClass:[JSQCustomTimelineMediaItem class]]){
             JSQCustomTimelineMediaItem *locationItem = (JSQCustomTimelineMediaItem *)mediaItem;
@@ -1645,7 +1673,7 @@
 {
     if ([UIPasteboard generalPasteboard].image) {
         // If there's an image in the pasteboard, construct a media item with that image and `send` it.
-        [self submitPhotoMessage:[UIPasteboard generalPasteboard].image withDate:[NSDate dateWithTimeIntervalSinceNow:0] inLoactionWithId:nil orCustomLocation:nil];
+        [self submitPhotoMessage:[UIPasteboard generalPasteboard].image withDate:[NSDate dateWithTimeIntervalSinceNow:0] inLoactionWithId:nil orEventId:nil orCustomLocation:nil];
         return NO;
     }
     return YES;
@@ -1801,7 +1829,7 @@ didChangeAudioCategory:(NSString *)category
     UIImage *attachedImage = info[UIImagePickerControllerOriginalImage];
     [reader dismissViewControllerAnimated:NO completion:NULL];
     
-    [self submitPhotoMessage:attachedImage withDate:[NSDate dateWithTimeIntervalSinceNow:0] inLoactionWithId:nil orCustomLocation:nil];
+    [self submitPhotoMessage:attachedImage withDate:[NSDate dateWithTimeIntervalSinceNow:0] inLoactionWithId:nil orEventId:nil orCustomLocation:nil];
 }
 
 // Image picker canceled

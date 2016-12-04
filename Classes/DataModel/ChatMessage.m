@@ -17,6 +17,7 @@
 @synthesize text;
 @synthesize media;
 @synthesize location;
+@synthesize event;
 @synthesize parentMessage;
 @synthesize timelineMsgUser;
 @synthesize timelineMsgEvent;
@@ -39,6 +40,7 @@
     text = [decoder decodeObjectForKey:@"text"];
     media = [decoder decodeObjectForKey:@"media"];
     location = [decoder decodeObjectForKey:@"location"];
+    event = [decoder decodeObjectForKey:@"event"];
     parentMessage = [decoder decodeObjectForKey:@"parentMessage"];
     timelineMsgUser = [decoder decodeObjectForKey:@"timelineMsgUser"];
     timelineMsgLocation = [decoder decodeObjectForKey:@"timelineMsgLocation"];
@@ -57,6 +59,7 @@
     [encoder encodeObject:text forKey:@"text"];
     [encoder encodeObject:media forKey:@"media"];
     [encoder encodeObject:location forKey:@"location"];
+    [encoder encodeObject:event forKey:@"event"];
     [encoder encodeObject:parentMessage forKey:@"parentMessage"];
     [encoder encodeObject:timelineMsgUser forKey:@"timelineMsgUser"];
     [encoder encodeObject:timelineMsgLocation forKey:@"timelineMsgLocation"];
@@ -117,7 +120,15 @@
         location = [[Location alloc] init];
         [location fillWithJSON:[jsonObject objectForKey:@"locationId"]];
     }
+
     
+    // event
+    event = nil;
+    if ([jsonObject objectForKey:@"event"] && [jsonObject objectForKey:@"event"] != [NSNull null]){
+        event = [[Event alloc] init];
+        [event fillWithJSON:[jsonObject objectForKey:@"event"]];
+    }
+
     // parent message
     parentMessage = nil;
     if ([jsonObject objectForKey:@"parent"] && [jsonObject objectForKey:@"parent"] != [NSNull null]){
@@ -155,7 +166,7 @@
 }
 
 - (BOOL) isMediaMessage{
-    if([media.objectId length] != 0 || location || [self isTimelineMsg])
+    if([media.objectId length] != 0 || location || event || [self isTimelineMsg])
         return YES;
     return NO;
 }

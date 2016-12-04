@@ -45,7 +45,6 @@
     BOOL isPlaying;
     BOOL isFirstTime;
     BOOL isPreviewOnly;
-    BOOL isLocationSelectedFromMap;
     RecordMediaFor recordMediaFor; // used to indicate how we are planing to use the Media we record "post it to timeline or upload it to chat"
 }
 
@@ -63,11 +62,11 @@
 @property (strong, nonatomic) IBOutlet UIButton *addTagButton;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *loaderView;
 @property (strong, nonatomic) IBOutlet Location* selectedLocation;
+@property (strong, nonatomic) IBOutlet Event *selectedEvent;
 @property (strong, nonatomic) UIImage *pickedImage;
 @property (strong, retain) NSURL *videoURL;
 @property RecordMediaFor recordMediaFor;
 @property BOOL isPreviewOnly;
-@property BOOL isLocationSelectedFromMap;
 
 
 - (void)setMediaObject:(MediaType)type withImage:(UIImage*)image withVideoURL:(NSURL*)url;
